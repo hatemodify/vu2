@@ -23,12 +23,6 @@ app.use(cors());
 
 
 
-app.get('/posts', (req, res) => {
-  res.send([{
-    title: 'hello world',
-    description: 'hi there!'
-  }])
-});
 
 //add 
 app.post('/posts', (req, res) => {
@@ -62,6 +56,17 @@ app.get('/posts', (req, res) => {
   });
 });
 
+
+app.get('/posts:id', (req, res) => {
+  Post.find({}, 'title description', (err, posts) => {
+    if (err) {
+      console.log(err);
+    }
+    res.send({
+      posts: posts
+    });
+  });
+});
 
 
 
