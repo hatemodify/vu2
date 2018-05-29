@@ -6,5 +6,8 @@ export default {
   },
   addPost (params) {
     return Api().post('posts', params)
+  },
+  newsList (params) {
+    return Api().get('news')
   }
 }

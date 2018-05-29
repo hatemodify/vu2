@@ -4,6 +4,8 @@ const cors = require('cors');
 const morgan = require('morgan');
 const mongoose = require('mongoose');
 const Post = require('../models/post');
+const NewsAPI = require('newsapi');
+const newsapi = new NewsAPI('602cd3b6051a451d8e99935b8e7cad01');
 
 
 mongoose.connect('mongodb://localhost:27017/posts');
@@ -43,6 +45,20 @@ app.post('/posts', (req, res) => {
   })
 });
 
+
+
+
+app.get('/posts:id', (req, res) => {
+  Post.find({}, 'title description', (err, posts) => {
+    if (err) {
+      console.log(err);
+    }
+    res.send({
+      posts: posts
+    });
+  });
+});
+
 app.get('/posts', (req, res) => {
   Post.find({}, 'title description', (err, posts) => {
     if (err) {
@@ -57,17 +73,25 @@ app.get('/posts', (req, res) => {
 });
 
 
-app.get('/posts:id', (req, res) => {
-  Post.find({}, 'title description', (err, posts) => {
-    if (err) {
-      console.log(err);
-    }
+app.get('/news', (req, res) => {
+  newsapi.v2.everything({
+    q: '주식',
+    language: 'ko',
+  }).then(response => {
+    console.log(response);
+    let news = { ...response };
     res.send({
-      posts: posts
-    });
+      news:news.articles
+    })
+    // res.json({ root:news.articles });
+    /*
+      {
+        status: "ok",
+        articles: [...]
+      }
+    */
   });
 });
-
 
 
 
