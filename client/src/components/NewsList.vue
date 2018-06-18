@@ -1,69 +1,56 @@
-<template>
-  <div class="news">
-    <h1>news</h1>
-      <table>
-        <tr>
-          <td>Title</td>
-          <td width="550">Description</td>
-          <td width="100" align="center">Action</td>
-        </tr>
 
-      </table>
+<template>
+  <div class="hello">
+    <div class="search_form">
+      <input type="text" class="inp_search" id="q" name="q" v-model="query">
+      <router-link v-bind:to="{ name: 'Search' , params: { query: query } }" class="btn_search"></router-link>     
     </div>
+    <ul class="list_news">
+      <li v-for="(v, k) in news"> 
+        <span class="bg_news" v-if="!v.urlToImage && k == 'sports'" style="background-image:url('https://www.mercurynews.com/wp-content/uploads/2018/06/636415346323739650-N-Keal-Harry2.jpg?w=620')"></span>
+        <span class="bg_news" v-else-if="!v.urlToImage && k == 'business'" style="background-image:url('http://d1841mjet2hm8m.cloudfront.net/thumb-900/fr_1094/1720/23/bb55e6007a2fccaf289377dc7f391f51.jpg')"></span>
+        <span class="bg_news" v-else-if="!v.urlToImage && k == 'entertainment'" style="backgound-image:url('http://d1841mjet2hm8m.cloudfront.net/thumb-900/fr_1094/1720/61/e758438a81fd37dce2b9116862e1fcbb.jpg')"></span>
+        <span class="bg_news" v-else-if="!v.urlToImage && k == 'general'" style="backgound-image:url('http://d1841mjet2hm8m.cloudfront.net/thumb-900t/fr_1228/1620/66/583e4285b0f5bed7a211a62797e8a05c.jpg')"></span>
+        <span class="bg_news" v-else v-bind:style="{ backgroundImage: 'url(' + v.urlToImage + ')' }"></span>
+        <h3 class="news_cate">{{k}}</h3>
+        <div class="tit">{{v.title}}</div>
+        <p class="desc_news">
+          {{v.description}}
+        </p>
+
+        <!-- <img v-bind:src="news.urlToImage"> -->
+        <span class="txt_date">{{v.publishedAt}}</span>
+        <a :href="v.url" class="link_more" target="_blank">read more ></a>
+      </li>
+    </ul>
+  </div>
+  
 </template>
 
 <script>
-import PostsService from '@/services/PostsService'
+import PostsService from "@/services/PostsService";
 export default {
-  name: 'news',
+  name: 'News',
   data () {
     return {
-      news: []
-    }
+      msg: '좀나와라 쫌',
+      news: [],
+      query: ''
+    };
   },
-  mounted () {
-    this.getNews()
+  mounted() {
+    this.getNews();
   },
   methods: {
-    async getNews () {
-      const response = await PostsService.newsList()
-      console.log(response)
+    async getNews() {
+      const response = await PostsService.newsList();
+      this.news = response.data.news;
     }
   }
-}
+};
 </script>
-<style type="text/css">
-.table-wrap {
-  width: 60%;
-  margin: 0 auto;
-  text-align: center;
-}
-table th, table tr {
-  text-align: left;
-}
-table thead {
-  background: #f2f2f2;
-}
-table tr td {
-  padding: 10px;
-}
-table tr:nth-child(odd) {
-  background: #f2f2f2;
-}
-table tr:nth-child(1) {
-  background: #4d7ef7;
-  color: #fff;
-}
-a {
-  color: #4d7ef7;
-  text-decoration: none;
-}
-a.add_post_link {
-  background: #4d7ef7;
-  color: #fff;
-  padding: 10px 80px;
-  text-transform: uppercase;
-  font-size: 12px;
-  font-weight: bold;
-}
+
+<style lang="scss">
+@import "../assets/css/news.scss";
 </style>
+

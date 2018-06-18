@@ -7,7 +7,13 @@ export default {
   addPost (params) {
     return Api().post('posts', params)
   },
-  newsList (params) {
+  newsList () {
     return Api().get('news')
+  },
+/*   getQuery (params) {
+    return Api().get('news/search/' + params.query, params)    
+  }, */
+  searchList (params) {
+    return Api().get('news/search/' + params.query, params) 
   }
 }

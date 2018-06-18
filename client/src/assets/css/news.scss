@@ -1,0 +1,88 @@
+.list_news {
+  overflow: hidden;
+  li {
+    background-size: cover;
+    position: relative;
+    width: 46%;
+    float: left;
+    margin: 0 2% 24px 2%;
+    height: 240px;
+    border-radius: 10px;
+    padding: 100px 10px 20px;
+    overflow: hidden;
+  }
+  .news_cate {
+    position: absolute;
+    top: 25px;
+    left: 10px;
+    color: #fff;
+    font-size: 15px;
+    font-weight: bold;
+    text-transform: uppercase;
+  }
+  .tit {
+    font-size: 14px;
+    color: #fff;
+    margin-bottom: 5px;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+  }
+  .desc_news {
+    color: #fff;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    font-size: 13px;
+    margin-bottom: 10px;
+  }
+  .txt_date {
+    display: block;
+    font-size: 12px;
+    color: #f5f5f5;
+    margin-bottom: 10px;
+  }
+  .link_more {
+    color: #fff;
+  }
+  .bg_news {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    background-size: cover;
+    z-index: -1;
+    &:after {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, .2);
+      content: "";
+    }
+  }
+}
+
+.search_form {
+  position: relative;
+  padding: 0 2%;
+  .inp_search {
+    display: block;
+    margin: 20px 0;
+    border: 1px solid #ededed;
+    width: 100%;
+    height: 45px;
+  }
+  .btn_search {
+    position: absolute;
+    right: 10px;
+    top: 10px;
+    width: 40px;
+    height: 40px;
+    background: url('https://image.flaticon.com/icons/svg/149/149309.svg') no-repeat;
+    background-size: 30px 30px;
+  }
+}
