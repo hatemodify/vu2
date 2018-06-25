@@ -10,10 +10,7 @@ export default {
   newsList () {
     return Api().get('news')
   },
-/*   getQuery (params) {
-    return Api().get('news/search/' + params.query, params)    
-  }, */
   searchList (params) {
-    return Api().get('news/search/' + params.query, params) 
+    return Api().get('news/search/' + params.query, params)
   }
 }

@@ -145,10 +145,10 @@ function getNewsList(cate) {
 function getNewsSearch(query) {
   return new Promise((resolve, reject) => {
     newsapi.v2
-      .everything({
-        language: 'ko',
+      .everything({        
         q: query,
-        pageSize: 20
+        pageSize: 20,
+        language: 'ko',
       })
       .then(res => res.articles)
       .then(data => resolve(data))
