@@ -1,29 +1,33 @@
-const express = require("express");
-const bodyParesr = require("body-parser");
-const cors = require("cors");
-const morgan = require("morgan");
-const mongoose = require("mongoose");
-const Post = require("../models/post");
-const NewsAPI = require("newsapi");
-const newsapi = new NewsAPI("602cd3b6051a451d8e99935b8e7cad01");
+const express = require('express');
+const bodyParesr = require('body-parser');
+const cors = require('cors');
+const morgan = require('morgan');
+const mongoose = require('mongoose');
+const Post = require('../models/post');
 
-mongoose.connect("mongodb://localhost:27017/posts");
+
+
+
+const NewsAPI = require('newsapi');
+const newsapi = new NewsAPI('602cd3b6051a451d8e99935b8e7cad01');
+
+mongoose.connect('mongodb://localhost:27017/news');
 
 const db = mongoose.connection;
-db.on("error", console.error.bind(console, "connection error"));
+db.on('error', console.error.bind(console, 'connection error'));
 
-db.once("open", callback => {
-  console.log("connection success");
+db.once('open', callbak => {
+  console.log('db connection success');
 });
 
 const app = express();
 
-app.use(morgan("combined"));
+app.use(morgan('combined'));
 app.use(bodyParesr.json());
 app.use(cors());
-
+app.use('/user', require('../routes/user'));
 //add
-app.post("/posts", (req, res) => {
+app.post('/posts', (req, res) => {
   const db = req.db;
   const title = req.body.title;
   const description = req.body.description;
@@ -36,13 +40,14 @@ app.post("/posts", (req, res) => {
     error ? console.log(error) : null;
     res.send({
       success: true,
-      message: "Post saved successfully"
+      message: 'Post saved successfully'
     });
   });
 });
 
-app.get("/posts:id", (req, res) => {
-  Post.find({}, "title description", (err, posts) => {
+
+app.get('/posts:id', (req, res) => {
+  Post.find({}, 'title description', (err, posts) => {
     if (err) {
       console.log(err);
     }
@@ -54,7 +59,7 @@ app.get("/posts:id", (req, res) => {
 
 
 app.put('/posts/:id', (req, res) => {
-  var db = req.db;
+  const db = req.db;
   Post.findById(req.params.id, 'title description', function (error, post) {
     if (error) {
       console.error(error);
@@ -68,16 +73,35 @@ app.put('/posts/:id', (req, res) => {
       }
       res.send({
         success: true
-      })
-    })
-  })
-})
+      });
+    });
+  });
+});
 
 
 
 
-app.get("/posts", (req, res) => {
-  Post.find({}, "title description", (err, posts) => {
+/* app.post('/signup', (req, res) => {
+  const db = req.db;
+  const id = req.body.id;
+  const password = req.body.password;
+  const addUser = new User({
+    id: id,
+    password: password
+  });
+
+  addUser.save(error => {
+    error ? console.log(error) : null;
+    res.send({
+      success: true,
+      message: 'add user successfully'
+    });
+  });
+}); */
+
+
+app.get('/posts', (req, res) => {
+  Post.find({}, 'title description', (err, posts) => {
     if (err) {
       console.log(err);
     }
@@ -90,7 +114,7 @@ app.get("/posts", (req, res) => {
 });
 
 
-app.get("/news", (req, res) => {
+app.get('/news', (req, res) => {
   Promise.all([
       getNewsList(`business`),
       getNewsList(`sports`),
@@ -111,7 +135,7 @@ app.get("/news", (req, res) => {
         }
       })
     )
-    .catch(err => res.send("Ops, something has gone wrong"));
+    .catch(err => res.send('Ops, something has gone wrong'));
 });
 
 app.get('/news/search/:query', (req, res) => {
@@ -123,8 +147,11 @@ app.get('/news/search/:query', (req, res) => {
         result
       })
     )
-    .catch(err => res.send("Ops, something has gone wrong"));
+    .catch(err => res.send('Ops, something has gone wrong'));
 });
+
+
+
 
 
 function getNewsList(cate) {
@@ -132,8 +159,8 @@ function getNewsList(cate) {
     newsapi.v2
       .topHeadlines({
         category: cate,
-        language: "ko",
-        country: "kr",
+        language: 'ko',
+        country: 'kr',
         pageSize: 1
       })
       .then(res => res.articles[0])
@@ -145,7 +172,7 @@ function getNewsList(cate) {
 function getNewsSearch(query) {
   return new Promise((resolve, reject) => {
     newsapi.v2
-      .everything({        
+      .everything({
         q: query,
         pageSize: 20,
         language: 'ko',
@@ -155,6 +182,7 @@ function getNewsSearch(query) {
       .catch(err => console.log(err));
   });
 }
+
 
 
 app.listen(process.env.PORT || 9000);

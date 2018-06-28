@@ -6,8 +6,17 @@ import Posts from '@/components/Posts'
 import NewPost from '@/components/NewPost'
 import NewsList from '@/components/NewsList'
 import EditPost from '@/components/EditPost'
+import Login from '@/components/Login'
+import Mypage from '@/components/Mypage'
+import SignUp from '@/components/SignUp'
 
 Vue.use(Router)
+
+const requireAuth = () => (from, to, next) => {
+  const isAuthenticated = false
+  if (isAuthenticated) return next()
+  next('/login?returnPath=mypage')
+}
 
 export default new Router({
   mode: 'history',
@@ -41,6 +50,22 @@ export default new Router({
       path: '/posts/:id',
       name: 'EditPost',
       component: EditPost
+    },
+    {
+      path: '/login',
+      name: 'Login',
+      component: Login
+    },
+    {
+      path: '/mypage',
+      name: 'Mypage',
+      component: Mypage,
+      beforeEnter: requireAuth()
+    },
+    {
+      path: '/signup',
+      name: 'SignUp',
+      component: SignUp
     }
   ]
 })
