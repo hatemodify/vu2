@@ -1,5 +1,8 @@
 <template>
   <div id="app">
+    <aside class="wrap_gnb">
+      
+    </aside>
     <router-view/>
   </div>
 </template>

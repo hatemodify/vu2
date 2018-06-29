@@ -8,24 +8,24 @@
 </template>
 
 <script>
-import UserService from "@/services/UserService";
+import UserService from '@/services/UserService'
 export default {
   data: () => {
     return {
-      id: "",
-      password: ""
+      id: '',
+      password: ''
     }
   },
   methods: {
-    async signUp() {
+    async signUp () {
       await UserService.addUser({
         id: this.id,
         password: this.password
-      });
-      this.$router.push({ name: 'Login' });
+      })
+      this.$router.push({ name: 'Login' })
     }
   }
-  /* 
+  /*
   methods: {
     signUp: function(event){
       this.$http.post("../services/UserService", {
@@ -33,17 +33,17 @@ export default {
         })
         .then(response => {
           if (response.data.result === 0) {
-            alert("Error, please, try again");
+            alert("Error, please, try again")
           }
           if (response.data.result === 1) {
-            alert("Success");
-            this.$router.push("/login"); // Login 페이지로 보내줌
+            alert("Success")
+            this.$router.push("/login") // Login 페이지로 보내줌
           }
         })
         .catch(function(error) {
-          alert("error");
-        });
+          alert("error")
+        })
     }
   } */
-};
+}
 </script>

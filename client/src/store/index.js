@@ -4,31 +4,31 @@ import axios from 'axios'
 
 Vue.use(Vuex)
 
-const host = process.env.HOST
+// const host = process.env.HOST
 
 export default new Vuex.Store({
   state: {
-    accessToken: null
+    accessToken: 0
   },
   getters: {
 
   },
   mutations: {
-    LOGIN (state, {
-      accessToken
-    }) {
-      state.accessToken = accessToken
+    LOGIN (state, id) {
+      state.accessToken = id
+      localStorage.accessToken = id
     },
     LOGOUT (state) {
       state.accessToken = null
+      delete localStorage.accessToken
     }
   },
   actions: {
-    LOGIN ({commit}, {id, password}) {
-      return axios.post(`${host}/login`, {id, password})
-        .then(({data}) => commit('LOGIN', data))
+    LOGIN ({commit}, id) {
+      commit('LOGIN', id)
     },
     LOGOUT ({commit}) {
+      axios.defaults.headers.common['Authorization'] = undefined
       commit('LOGOUT')
     }
   }
