@@ -1,15 +1,17 @@
 <template>
   <div id="app">
-    <aside class="wrap_gnb">
-      
-    </aside>
+    <siteheader></siteheader>
     <router-view/>
   </div>
 </template>
 
 <script>
+import SiteHeader from './header'
 export default {
-  name: 'App'
+  name: 'App',
+  components: {
+    siteheader: SiteHeader
+  }
 }
 </script>
 

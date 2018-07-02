@@ -1,11 +1,12 @@
 <template>
-  <div class="hello">    
+  <div class="hello">
     <div class="search_form">
       <input type="text" class="inp_search" id="q" name="q" v-model="query">
       <router-link v-bind:to="{ name: 'Search' , params: { query: query } }" class="btn_search"></router-link>
     </div>
     <ul class="list_news">
-      <li v-for="(v, k) in news" :key="v" v-bind:class="{aaa : bbb}">
+      <li v-for="(v, k) in news" :key="k">
+        <button class="btn_like" v-bind:class="{ like:!like}" v-on:click="toggleSelected()"></button>
         <span class="bg_news" v-if="!v.urlToImage && k == 'sports'" style="background-image:url('https://www.mercurynews.com/wp-content/uploads/2018/06/636415346323739650-N-Keal-Harry2.jpg?w=620')"></span>
         <span class="bg_news" v-else-if="!v.urlToImage && k == 'business'" style="background-image:url('http://d1841mjet2hm8m.cloudfront.net/thumb-900/fr_1094/1720/23/bb55e6007a2fccaf289377dc7f391f51.jpg')"></span>
         <span class="bg_news" v-else-if="!v.urlToImage && k == 'entertainment'" style="background-image:url('http://d1841mjet2hm8m.cloudfront.net/thumb-900/fr_1094/1720/61/e758438a81fd37dce2b9116862e1fcbb.jpg')"></span>
@@ -16,7 +17,6 @@
         <p class="desc_news">
           {{v.description}}
         </p>
-
         <!-- <img v-bind:src="news.urlToImage"> -->
         <span class="txt_date">{{v.publishedAt}}</span>
         <a :href="v.url" class="link_more" target="_blank">read more ></a>
@@ -29,17 +29,24 @@
 import PostsService from '@/services/PostsService'
 export default {
   name: 'News',
-  data () {
+  data () {    
     return {
-      msg: '좀나와라 쫌',
       news: [],
-      query: ''
+      query: '',      
     }
   },
   mounted () {
     this.getNews()
+    this.toggleSelected()
   },
   methods: {
+    chk (ctx){
+      console.log(ctx);
+      console.log(this.like)
+    },
+    toggleSelected () {      
+      this.like = !this.like
+    },
     async getNews () {
       const response = await PostsService.newsList()
       this.news = response.data.news
@@ -49,5 +56,5 @@ export default {
 </script>
 
 <style lang="scss">
-@import '../assets/css/news.scss'
+@import "../assets/css/news.scss"
 </style>

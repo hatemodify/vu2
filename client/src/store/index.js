@@ -20,7 +20,7 @@ export default new Vuex.Store({
     },
     LOGOUT (state) {
       state.accessToken = null
-      delete localStorage.accessToken
+      localStorage.accessToken = null
     }
   },
   actions: {

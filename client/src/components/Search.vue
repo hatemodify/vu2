@@ -1,4 +1,3 @@
-/* eslint-disable */
 <template>
   <div class="hello">
     <ul class="list_news">

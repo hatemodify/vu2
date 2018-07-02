@@ -1,6 +1,37 @@
 .list_news {
   overflow: hidden;
   li {
+    .btn_like{
+      width: 10px;
+      height: 10px;
+      background: #fff;
+      position: relative;
+      transform: rotate(45deg);
+      &:before,
+      &:after{
+        position: absolute;
+        width: 10px;
+        height: 10px;
+        border-radius: 50%;
+        background: #fff;
+        content: "";
+      }
+      &:before{
+        left:-5px;
+        top:0px;
+      }
+      &:after{
+        right:0;
+        top:-5px;
+      }
+      &.like{
+        background: #f00;
+        &:before,
+        &:after{
+          background: #f00;
+        }
+      }
+    }
     background-size: cover;
     position: relative;
     width: 46%;
