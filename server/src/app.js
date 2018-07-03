@@ -4,6 +4,7 @@ const cors = require('cors');
 const morgan = require('morgan');
 const mongoose = require('mongoose');
 const Post = require('../models/post');
+const User = require('../models/user');
 
 
 
@@ -114,7 +115,7 @@ app.get('/posts', (req, res) => {
 });
 
 
-app.get('/news', (req, res) => {
+app.get('/news', (req, res) => {  
   Promise.all([
       getNewsList(`business`),
       getNewsList(`sports`),
@@ -123,7 +124,7 @@ app.get('/news', (req, res) => {
       getNewsList(`health`),
       getNewsList(`science`)
     ])
-    .then(([business, sports, entertainment, general, health, science]) =>
+    .then(([business, sports, entertainment, general, health, science]) =>    
       res.send({
         news: {
           business,
@@ -133,9 +134,9 @@ app.get('/news', (req, res) => {
           health,
           science,
         }
-      })
+      })      
     )
-    .catch(err => res.send('Ops, something has gone wrong'));
+    .catch(err => res.send('Ops, something has gone wrong'));    
 });
 
 app.get('/news/search/:query', (req, res) => {
@@ -150,6 +151,22 @@ app.get('/news/search/:query', (req, res) => {
     .catch(err => res.send('Ops, something has gone wrong'));
 });
 
+app.put('/addlike', (req, res) => {
+  const db = req.db;
+  const like = req.body.like;
+  const userId = req.body.userId;
+  const likeAdd = new User({
+
+  });
+
+  new_post.save(error => {
+    error ? console.log(error) : null;
+    res.send({
+      success: true,
+      message: 'Post saved successfully'
+    });
+  });
+});
 
 
 

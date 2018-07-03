@@ -12,5 +12,8 @@ export default {
   },
   searchList (params) {
     return Api().get('news/search/' + params.query, params)
+  },
+  addLike (params) {
+    return Api().put('addlike', params)
   }
 }

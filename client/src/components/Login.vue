@@ -3,7 +3,7 @@
     <h2 class="tit_login">login</h2>
       <input type="text" v-model="id" placeholder="Email Address">
       <input type="password" v-model="password" placeholder="Password">
-      <button class="btn_login" @click="logIn(id)" v-if="chkLogin == 0">login</button>
+      <button class="btn_login" @click="logIn(id)" v-if="chkLogin == 'null'">login</button>
       <button class="btn_login" @click="logOut(id)" v-else>logout</button>
     </div>
 </template>

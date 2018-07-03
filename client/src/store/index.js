@@ -8,7 +8,7 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
-    accessToken: 0
+    accessToken: null
   },
   getters: {
 
