@@ -27,6 +27,7 @@
 
 <script>
 import PostsService from '@/services/PostsService'
+import axios from 'axios'
 export default {
   name: 'News',
   data () {
@@ -46,9 +47,9 @@ export default {
       console.log(this.like)
     },
     async thisLike (val, index) {
-      console.log(val)
+      console.log(val)      
       await PostsService.addLike({
-        like: this.val,
+        like: val,
         userId: localStorage.accessToken
       })
     },
