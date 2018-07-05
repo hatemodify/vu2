@@ -151,37 +151,24 @@ app.get('/news/search/:query', (req, res) => {
     .catch(err => res.send('Ops, something has gone wrong'));
 });
 
-app.put('/like', (req, res) => {
+app.put('/scrap', (req, res) => {
   const db = req.db;
-  const like = req.body.like;
-  const userId = req.body.userId;  
-
-  // User.findOneAndUpdate({id:userId}, {scraps:like});
-
-  User.update({id:userId}, {scraps:like},
-    res.send({
-      success:true
-    })
-  );
-
-  /* User.findByIdAndUpdate({
+  const scrap = req.body.scrap;
+  const userId = req.body.userId;
+  User.findOneAndUpdate({
     id: userId
   }, {
     $push: {
-      scraps: like
+      scraps: scrap
     }
+  }, (success) => {
+    console.log('success');
   });
-  User.find({id:like},'scraps', (err,user)=>{
-    if(err) console.log(err);
-    user.scraps = like;
-    user.save((error)=>{
-      if(error) console.log(error);
+});
 
-      res.send({
-        success:true
-      })
-    })
-  })*/
+
+app.get('/myscrap', (req, res) => {
+  console.log(req.header)
 
 });
 

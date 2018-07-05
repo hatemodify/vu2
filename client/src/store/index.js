@@ -26,6 +26,8 @@ export default new Vuex.Store({
   actions: {
     LOGIN ({commit}, id) {
       commit('LOGIN', id)
+
+      axios.defaults.headers.common['Authorization'] = `Bearer ${localStorage.accessToken}`
     },
     LOGOUT ({commit}) {
       axios.defaults.headers.common['Authorization'] = undefined

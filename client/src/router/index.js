@@ -9,6 +9,7 @@ import EditPost from '@/components/EditPost'
 import Login from '@/components/Login'
 import Mypage from '@/components/Mypage'
 import SignUp from '@/components/SignUp'
+import MyScraps from '@/components/MyScraps'
 
 Vue.use(Router)
 
@@ -17,6 +18,11 @@ const requireAuth = () => (from, to, next) => {
   if (isAuthenticated) return next()
   next('/login?returnPath=mypage')
 }
+
+const returnId = () =>{
+  return localStorage.accessToken
+}
+
 
 export default new Router({
   mode: 'history',
@@ -66,6 +72,11 @@ export default new Router({
       path: '/signup',
       name: 'SignUp',
       component: SignUp
+    },
+    {
+      path: '/myscrap',
+      name: 'MyScrap',
+      component: MyScraps,
     }
   ]
 })

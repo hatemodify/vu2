@@ -6,7 +6,7 @@
     </div>
     <ul class="list_news">
       <li v-for="(v, k) in news" :key="k">
-        <button class="btn_like" :class="{ 'active': isActive}" @click="thisLike(v)"></button>
+        <button class="btn_like" :class="{ 'active': isActive}" @click="thisScrap(v)"></button>
         <span class="bg_news" v-if="!v.urlToImage && k == 'sports'" style="background-image:url('https://www.mercurynews.com/wp-content/uploads/2018/06/636415346323739650-N-Keal-Harry2.jpg?w=620')"></span>
         <span class="bg_news" v-else-if="!v.urlToImage && k == 'business'" style="background-image:url('http://d1841mjet2hm8m.cloudfront.net/thumb-900/fr_1094/1720/23/bb55e6007a2fccaf289377dc7f391f51.jpg')"></span>
         <span class="bg_news" v-else-if="!v.urlToImage && k == 'entertainment'" style="background-image:url('http://d1841mjet2hm8m.cloudfront.net/thumb-900/fr_1094/1720/61/e758438a81fd37dce2b9116862e1fcbb.jpg')"></span>
@@ -39,19 +39,23 @@ export default {
   },
   mounted () {
     this.getNews()
-    this.thisLike()
   },
   methods: {
     chk (ctx) {
       console.log(ctx)
       console.log(this.like)
     },
-    async thisLike (val, index) {
-      console.log(val)      
-      await PostsService.addLike({
-        like: val,
-        userId: localStorage.accessToken
-      })
+    async thisScrap (val, index) {
+      const userId = localStorage.accessToken
+      if(userId !== 'null'){
+        await PostsService.addScrap({
+          scrap: val,
+          userId
+        })
+      }else{
+        alert('로그인 해주세요')
+        this.$router.push({ name: 'Login' })
+      }
     },
     async getNews () {
       const response = await PostsService.newsList()

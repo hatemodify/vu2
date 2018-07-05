@@ -13,7 +13,12 @@ export default {
   searchList (params) {
     return Api().get('news/search/' + params.query, params)
   },
-  addLike (params) {
-    return Api().put('like', params)   
+  addScrap (params) {
+    return Api().put('scrap', params)
+  },
+  myScraps () {
+    const userId = localStorage.accessToken
+    console.log(userId)
+    return Api().get('myscrap', userId)
   }
 }
