@@ -168,12 +168,20 @@ app.put('/scrap', (req, res) => {
 
 
 app.get('/myscrap', (req, res) => {
-  console.log(req.header)
-
+  const userId = req.headers.userid;
+  console.log(userId)
+  User.find({id:userId} , (err, data) => {
+    console.log(data)
+    if(err){
+      console.log(err);
+    }
+    res.send({
+      data:data[0].scraps
+    })    
+  }).sort({
+    _id: -1
+  });
 });
-
-
-
 
 function getNewsList(cate) {
   return new Promise((resolve, reject) => {

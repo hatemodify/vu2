@@ -4,8 +4,6 @@ import axios from 'axios'
 
 Vue.use(Vuex)
 
-// const host = process.env.HOST
-
 export default new Vuex.Store({
   state: {
     accessToken: null
@@ -25,9 +23,8 @@ export default new Vuex.Store({
   },
   actions: {
     LOGIN ({commit}, id) {
-      commit('LOGIN', id)
-
-      axios.defaults.headers.common['Authorization'] = `Bearer ${localStorage.accessToken}`
+      commit('LOGIN', id) 
+      enhanceAccessToeken(localStorage)    
     },
     LOGOUT ({commit}) {
       axios.defaults.headers.common['Authorization'] = undefined
@@ -35,3 +32,10 @@ export default new Vuex.Store({
     }
   }
 })
+
+const enhanceAccessToeken = () => {
+  const {accessToken} = localStorage
+  if (!accessToken) return
+  axios.defaults.headers.common['userId'] = `${accessToken}`
+}
+enhanceAccessToeken()

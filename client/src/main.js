@@ -4,6 +4,7 @@ import Vue from 'vue'
 import App from './App'
 import router from './router'
 import store from './store'
+import { TweenMax } from 'gsap/TweenMax'
 
 Vue.config.productionTip = false
 
@@ -12,6 +13,7 @@ new Vue({
   el: '#app',
   router,
   store,
+  TweenMax,
   components: {
     App
   },

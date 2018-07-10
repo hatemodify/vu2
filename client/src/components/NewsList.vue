@@ -1,11 +1,11 @@
 <template>
-  <div class="hello">
+  <div class="hello" ref="h">
     <div class="search_form">
       <input type="text" class="inp_search" id="q" name="q" v-model="query">
       <router-link v-bind:to="{ name: 'Search' , params: { query: query } }" class="btn_search"></router-link>
     </div>
     <ul class="list_news">
-      <li v-for="(v, k) in news" :key="k">
+      <li v-for="(v, k) in news" :key="k" ref="aaaaaa">
         <button class="btn_like" :class="{ 'active': isActive}" @click="thisScrap(v)"></button>
         <span class="bg_news" v-if="!v.urlToImage && k == 'sports'" style="background-image:url('https://www.mercurynews.com/wp-content/uploads/2018/06/636415346323739650-N-Keal-Harry2.jpg?w=620')"></span>
         <span class="bg_news" v-else-if="!v.urlToImage && k == 'business'" style="background-image:url('http://d1841mjet2hm8m.cloudfront.net/thumb-900/fr_1094/1720/23/bb55e6007a2fccaf289377dc7f391f51.jpg')"></span>
@@ -27,7 +27,6 @@
 
 <script>
 import PostsService from '@/services/PostsService'
-import axios from 'axios'
 export default {
   name: 'News',
   data () {
@@ -39,12 +38,10 @@ export default {
   },
   mounted () {
     this.getNews()
+    this.gsap()
+    
   },
   methods: {
-    chk (ctx) {
-      console.log(ctx)
-      console.log(this.like)
-    },
     async thisScrap (val, index) {
       const userId = localStorage.accessToken
       if(userId !== 'null'){
@@ -60,6 +57,13 @@ export default {
     async getNews () {
       const response = await PostsService.newsList()
       this.news = response.data.news
+    },
+    gsap : function () {
+      const tw = TweenMax
+      const el = this.$el.querySelector('.list_news').children
+      console.log(el)
+      tw.staggerTo(el
+, .5, {opacity:0} ,.2)
     }
   }
 }
