@@ -5,16 +5,18 @@ const morgan = require('morgan');
 const mongoose = require('mongoose');
 const Post = require('../models/post');
 const User = require('../models/user');
-
+const DB_SETTING = require('./dbsetting');
 
 
 
 const NewsAPI = require('newsapi');
 const newsapi = new NewsAPI('602cd3b6051a451d8e99935b8e7cad01');
 
-mongoose.connect('mongodb://localhost:27017/news');
+// mongoose.connect('mongodb://localhost:27017/news');
 
+mongoose.connect(DB_SETTING);
 const db = mongoose.connection;
+
 db.on('error', console.error.bind(console, 'connection error'));
 
 db.once('open', callbak => {
@@ -27,92 +29,7 @@ app.use(morgan('combined'));
 app.use(bodyParesr.json());
 app.use(cors());
 app.use('/user', require('../routes/user'));
-//add
-app.post('/posts', (req, res) => {
-  const db = req.db;
-  const title = req.body.title;
-  const description = req.body.description;
-  const new_post = new Post({
-    title: title,
-    description: description
-  });
-
-  new_post.save(error => {
-    error ? console.log(error) : null;
-    res.send({
-      success: true,
-      message: 'Post saved successfully'
-    });
-  });
-});
-
-
-app.get('/posts:id', (req, res) => {
-  Post.find({}, 'title description', (err, posts) => {
-    if (err) {
-      console.log(err);
-    }
-    res.send({
-      posts: posts
-    });
-  });
-});
-
-
-app.put('/posts/:id', (req, res) => {
-  const db = req.db;
-  Post.findById(req.params.id, 'title description', function (error, post) {
-    if (error) {
-      console.error(error);
-    }
-
-    post.title = req.body.title
-    post.description = req.body.description
-    post.save(function (error) {
-      if (error) {
-        console.log(error)
-      }
-      res.send({
-        success: true
-      });
-    });
-  });
-});
-
-
-
-
-/* app.post('/signup', (req, res) => {
-  const db = req.db;
-  const id = req.body.id;
-  const password = req.body.password;
-  const addUser = new User({
-    id: id,
-    password: password
-  });
-
-  addUser.save(error => {
-    error ? console.log(error) : null;
-    res.send({
-      success: true,
-      message: 'add user successfully'
-    });
-  });
-}); */
-
-
-app.get('/posts', (req, res) => {
-  Post.find({}, 'title description', (err, posts) => {
-    if (err) {
-      console.log(err);
-    }
-    res.send({
-      posts: posts
-    });
-  }).sort({
-    _id: -1
-  });
-});
+app.use('/posts', require('../routes/post'));
 
 
 app.get('/news', (req, res) => {
@@ -165,7 +82,6 @@ app.put('/scrap', (req, res) => {
     console.log('success');
   });
 });
-
 
 app.get('/myscrap', (req, res) => {
   const userId = req.headers.userid;

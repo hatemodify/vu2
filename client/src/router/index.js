@@ -10,6 +10,7 @@ import Login from '@/components/Login'
 import Mypage from '@/components/Mypage'
 import SignUp from '@/components/SignUp'
 import MyScraps from '@/components/MyScraps'
+import HeadLine from '@/components/HeadLine'
 
 Vue.use(Router)
 
@@ -33,9 +34,9 @@ export default new Router({
       component: Search
     },
     {
-      path: '/hellow',
-      name: 'HelloWorld',
-      component: HelloWorld
+      path: '/headline',
+      name: 'HeadLine',
+      component: HeadLine
     },
     {
       path: '/posts',

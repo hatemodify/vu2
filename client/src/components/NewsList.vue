@@ -4,9 +4,9 @@
       <input type="text" class="inp_search" id="q" name="q" v-model="query">
       <router-link v-bind:to="{ name: 'Search' , params: { query: query } }" class="btn_search"></router-link>
     </div>
-    <ul class="list_news">
+     <ul class="list_news">
       <li v-for="(v, k) in news" :key="k" ref="aaaaaa">
-        <button class="btn_like" :class="{ 'active': isActive}" @click="thisScrap(v)"></button>
+        <button class="btn_like" :class="{ 'active': isActive}" @click="thisScrap(v,k)"></button>
         <span class="bg_news" v-if="!v.urlToImage && k == 'sports'" style="background-image:url('https://www.mercurynews.com/wp-content/uploads/2018/06/636415346323739650-N-Keal-Harry2.jpg?w=620')"></span>
         <span class="bg_news" v-else-if="!v.urlToImage && k == 'business'" style="background-image:url('http://d1841mjet2hm8m.cloudfront.net/thumb-900/fr_1094/1720/23/bb55e6007a2fccaf289377dc7f391f51.jpg')"></span>
         <span class="bg_news" v-else-if="!v.urlToImage && k == 'entertainment'" style="background-image:url('http://d1841mjet2hm8m.cloudfront.net/thumb-900/fr_1094/1720/61/e758438a81fd37dce2b9116862e1fcbb.jpg')"></span>
@@ -17,9 +17,13 @@
         <p class="desc_news">
           {{v.description}}
         </p>
-        <!-- <img v-bind:src="news.urlToImage"> -->
         <span class="txt_date">{{v.publishedAt}}</span>
         <a :href="v.url" class="link_more" target="_blank">read more ></a>
+      </li>
+    </ul> 
+    <ul class="list_news" ref="list_news" @click="tests">
+      <li v-for="item in news.articles" @click="tests" ref="list"> 
+        <span class="bg_news" v-bind:style="{ backgroundImage: 'url(' + item.urlToImage + ')' }"></span>  
       </li>
     </ul>
   </div>
@@ -27,6 +31,7 @@
 
 <script>
 import PostsService from '@/services/PostsService'
+import axios from 'axios'
 export default {
   name: 'News',
   data () {
@@ -38,13 +43,24 @@ export default {
   },
   mounted () {
     this.getNews()
-    this.gsap()
-    
+    // this.fetchArticles()
   },
   methods: {
-    async thisScrap (val, index) {
+    fetchArticles: function () {
+      axios.get('https://newsapi.org/v2/top-headlines?country=us&category=business&apiKey=602cd3b6051a451d8e99935b8e7cad01').then((response) => {        
+        this.news = response.data
+      }, (error) => {
+        alert.log(error)
+      })
+    },
+    tests: function(){
+      const $elem = this.$ref['list_news']
+    console.log(this.$refs)      
+    },
+    async thisScrap (val, cate) {
       const userId = localStorage.accessToken
       if(userId !== 'null'){
+        val.category = cate 
         await PostsService.addScrap({
           scrap: val,
           userId

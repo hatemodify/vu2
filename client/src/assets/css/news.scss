@@ -1,4 +1,4 @@
-.list_news {
+/* .list_news {
   overflow: hidden;
   li {
     .btn_like{
@@ -38,7 +38,7 @@
     float: left;
     margin: 0 2% 24px 2%;
     height: 240px;
-    border-radius: 10px;
+    border-radius: 5px;
     padding: 100px 10px 20px;
     overflow: hidden;
   }
@@ -96,7 +96,7 @@
     }
   }
 }
-
+ */
 .search_form {
   position: relative;
   padding: 0 2%;
@@ -115,5 +115,44 @@
     height: 40px;
     background: url('https://image.flaticon.com/icons/svg/149/149309.svg') no-repeat;
     background-size: 30px 30px;
+  }
+}
+.list_headline{
+  .link_item{
+    display: block;
+    overflow: hidden;
+    position: relative;
+    max-height: 260px;
+    &:after{
+      position: absolute;
+      bottom:0;
+      left: 0;
+      width: 100%;
+      height:100%;   
+      background: linear-gradient(to bottom, rgba(0,0,0,0) 0%,rgba(0,0,0,0) 20%,rgba(0,0,0,0.65) 70%,rgba(0,0,0,0.65) 99%);
+      content: "";
+     }
+  }
+  .thumb_img{
+    width: 100%;
+  }
+  .wrap_info{
+    padding:0 15px;
+  }
+  .tit_news{
+    display: -webkit-box;
+    overflow: hidden;
+    margin-bottom: 10px;
+    font-size: 24px;
+    line-height: 60/48 * 100%;
+    word-break: keep-all;
+    color: #242424;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+  }
+  .txt_source{
+    font-size: 12px;
+    margin-right: 5px;
+    color: #838383;
   }
 }

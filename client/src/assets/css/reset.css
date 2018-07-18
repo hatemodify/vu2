@@ -33,8 +33,16 @@ section {
   unicode-range: U+4E00-9F95, U+F900-FA0B;
 }
 
+@font-face {
+  font-family: 'ns';
+  font-style: normal;
+  font-weight: 300;
+  src: local('NanumSquare'), url('../fonts/NanumSquare.woff') format('woff');
+  font-stretch: normal;
+}
+
 html {
-  font-family: 'NotoSansKR', 'malgun gothic', sans-serif;
+  font-family: 'ns', 'malgun gothic', sans-serif;
   /* 1 */
   -ms-text-size-adjust: 100%;
   /* 2 */
