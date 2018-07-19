@@ -118,6 +118,21 @@
   }
 }
 .list_headline{
+  li{
+    position: relative;
+    margin-bottom: 30px;
+  }
+  .btn_scrap{
+    position: absolute;
+    right: 20px;
+    top: 0;
+    width: 30px;
+    height: 35px;
+    border-left: 1px solid #eee;
+    border-right: 1px solid #eee;
+    background:none;
+    z-index: 1;
+  }
   .link_item{
     display: block;
     overflow: hidden;
@@ -142,8 +157,8 @@
   .tit_news{
     display: -webkit-box;
     overflow: hidden;
-    margin-bottom: 10px;
-    font-size: 24px;
+    margin:15px 0;
+    font-size: 20px;
     line-height: 60/48 * 100%;
     word-break: keep-all;
     color: #242424;
@@ -151,8 +166,23 @@
     -webkit-box-orient: vertical;
   }
   .txt_source{
-    font-size: 12px;
+    font-size: 13px;
     margin-right: 5px;
     color: #838383;
+  }
+  .link_more{
+    float: right;
+    position: relative;
+    &:after{
+      position: absolute;
+      bottom: 0;
+      right: 0;
+      width: 100%;
+      height: 10px;
+      background:url('../assets/images/ico_fead.png');
+      background-size: 50% 50%;
+      background-position: 0 0;
+      content: "";
+    }
   }
 }
