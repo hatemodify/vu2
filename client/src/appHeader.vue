@@ -8,19 +8,19 @@
     <nav id="appNav">
       <ul class="gnb">
         <li>
-          <a href="javascript:;">헤드라인</a>
+          <router-link to="/headline">헤드라인</router-link>
         </li>
         <li>
-          <a href="javascript:;">카테고리</a>
+          <router-link to="/categorylist">카테고리</router-link>
         </li>
         <li>
-          <a href="javascript:;">포스팅</a>
+          <router-link to="/categorylist">포스팅</router-link>
         </li>
         <li>
-          <a href="javascript:;">찾아보기</a>
+          <router-link to="/categorylist">찾아보기</router-link>
         </li>
         <li>
-          <a href="javascript:;">마이페이지</a>
+          <router-link to="/categorylist">마이페이지</router-link>
         </li>
       </ul>
     </nav>
@@ -31,7 +31,9 @@
 export default {
   name: "appHeader",
   data() {
-    return {};
+    return {
+
+    };
   }
 };
 </script>

@@ -1,4 +1,4 @@
-/* .list_news {
+.list_articles {
   overflow: hidden;
   li {
     .btn_like{
@@ -34,13 +34,14 @@
     }
     background-size: cover;
     position: relative;
-    width: 46%;
-    float: left;
     margin: 0 2% 24px 2%;
     height: 240px;
     border-radius: 5px;
     padding: 100px 10px 20px;
     overflow: hidden;
+    opacity: 0;
+    transition:ease-out .5s;
+    transform: translateX(100%)
   }
   .news_cate {
     position: absolute;
@@ -96,7 +97,7 @@
     }
   }
 }
- */
+
 .search_form {
   position: relative;
   padding: 0 2%;
@@ -192,6 +193,11 @@
     position: relative;
     text-align: center;
     vertical-align: middle;
+    perspective: 800px;
+    transform: rotateX(120deg);
+    transition:ease-out .3s;
+    opacity: 0;
+    text-transform: to-upper-case($string: "")
   }
   .bg_category{
     &:after{
@@ -211,52 +217,18 @@
     position: absolute;
     top:50%;
     left: 50%;
-    font-size: 15px;
+    z-index: 2;
+    font-size: 18px;
     color: #fff;
+    text-transform: capitalize;
     transform: translate(-50%, -50%);
     .name_ko{
       display: block;
-      font-size: 13px;
+      font-size: 15px;
       padding-top: 5px;
       margin-top: 3px;
       border-top: 1px solid #fff;
       color:#fff;
-    }
-  }
-  .business{
-    .bg_category{
-      background: url(../assets/images/bg_business.png) no-repeat;
-      background-size: cover;
-    }
-  }
-  .sports{
-    .bg_category{
-      background: url(../assets/images/bg_sports.png) no-repeat;
-      background-size: cover;
-    }
-  }
-  .general{
-    .bg_category{
-      background: url(../assets/images/bg_general.png) no-repeat;
-      background-size: cover;
-    }
-  }
-  .science{
-    .bg_category{
-      background: url(../assets/images/bg_science.png) no-repeat;
-      background-size: cover;
-    }
-  }
-  .health{
-    .bg_category{
-      background: url(../assets/images/bg_health.png) no-repeat;
-      background-size: cover;
-    }
-  }
-  .entertainment{
-    .bg_category{
-      background: url(../assets/images/bg_entertainment.png) no-repeat;
-      background-size: cover;
     }
   }
 }

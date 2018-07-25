@@ -77,6 +77,7 @@ export default {
     gsap : function () {
       const tw = TweenMax
       const el = this.$el.querySelector('.list_news').children
+      
       console.log(el)
       tw.staggerTo(el
 , .5, {opacity:0} ,.2)
