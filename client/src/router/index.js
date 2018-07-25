@@ -11,6 +11,8 @@ import Mypage from '@/components/Mypage'
 import SignUp from '@/components/SignUp'
 import MyScraps from '@/components/MyScraps'
 import HeadLine from '@/components/HeadLine'
+import CategoryList from '@/components/CategoryList'
+import Category from '@/components/Category'
 
 Vue.use(Router)
 
@@ -77,7 +79,17 @@ export default new Router({
     {
       path: '/myscrap',
       name: 'MyScrap',
-      component: MyScraps,
+      component: MyScraps
+    },
+    {
+      path: '/categorylist',
+      name: 'CategoryList',
+      component: CategoryList
+    },
+    {
+      path: '/category/:category',
+      name: 'Category',
+      component: Category
     }
   ]
 })

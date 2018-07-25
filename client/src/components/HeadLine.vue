@@ -12,7 +12,7 @@
         <div class="cf">
           <span class="txt_source">{{item.source.name}}</span>
           <span class="txt_date">{{convertDate(item.publishedAt)}}</span>
-          <a :href="item.url" class="link_more" target="_blank">자세히 볼래요</a>
+          <a :href="item.url" class="link_more" target="_blank">자세히 볼래요 ></a>
         </div>
       </div>
     </div>
@@ -31,26 +31,23 @@ export default {
     };
   },
   mounted() {
-    this.getHeadLine();
+    this.getHeadLine()
   },
   methods: {
     getHeadLine: function() {
       axios
-        .get(
-          "https://newsapi.org/v2/top-headlines?country=kr&apiKey=602cd3b6051a451d8e99935b8e7cad01",
-          {}
-        )
+        .get('https://newsapi.org/v2/top-headlines?country=kr&apiKey=602cd3b6051a451d8e99935b8e7cad01')
         .then(
           response => {
-            this.headLine = response.data.articles;
+            this.headLine = response.data.articles
           },
           error => {
-            alert(error);
+            alert(error)
           }
-        );
+        )
     },
     convertDate: function(date) {
-      return date.replace(/-/g, ".").slice(0, 10);
+      return date.replace(/-/g, ".").slice(0, 10)
     }
   }
 };

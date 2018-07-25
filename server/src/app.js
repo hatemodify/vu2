@@ -33,6 +33,7 @@ app.use('/posts', require('../routes/post'));
 
 
 app.get('/news', (req, res) => {
+  console.log(req.headers)
   Promise.all([
       getNewsList(`business`),
       getNewsList(`sports`),

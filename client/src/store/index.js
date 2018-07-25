@@ -24,7 +24,7 @@ export default new Vuex.Store({
   actions: {
     LOGIN ({commit}, id) {
       commit('LOGIN', id) 
-      enhanceAccessToeken(localStorage)    
+      // enhanceAccessToeken(localStorage)    
     },
     LOGOUT ({commit}) {
       axios.defaults.headers.common['Authorization'] = undefined
@@ -38,4 +38,4 @@ const enhanceAccessToeken = () => {
   if (!accessToken) return
   axios.defaults.headers.common['userId'] = `${accessToken}`
 }
-enhanceAccessToeken()
+// enhanceAccessToeken()
