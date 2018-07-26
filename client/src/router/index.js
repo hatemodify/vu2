@@ -1,7 +1,6 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import Search from '@/components/Search'
-import HelloWorld from '@/components/HelloWorld'
 import Posts from '@/components/Posts'
 import NewPost from '@/components/NewPost'
 import NewsList from '@/components/NewsList'
@@ -15,7 +14,6 @@ import CategoryList from '@/components/CategoryList'
 import Category from '@/components/Category'
 
 Vue.use(Router)
-
 const requireAuth = () => (from, to, next) => {
   const isAuthenticated = false
   if (isAuthenticated) return next()

@@ -19,6 +19,9 @@
 
 <script>
 import axios from 'axios'
+import VueLodash from 'vue-lodash'
+
+
   export default {
     data () {
       return {
@@ -27,7 +30,7 @@ import axios from 'axios'
       }
     },
     mounted () {
-      
+
     },
     created: function(){
       const {category} = this.$route.params        
@@ -35,29 +38,19 @@ import axios from 'axios'
         .get(`https://newsapi.org/v2/top-headlines?country=kr&category=${category}&apiKey=602cd3b6051a451d8e99935b8e7cad01`)
         .then(response => {this.articles = response.data.articles},
         error => {alert(error)})
-        this.$nextTick().then(function(){
-       const tw = TweenMax
-        const li = document.querySelector('.list_articles').childNodes   
-        console.log(li)
-        setTimeout(()=>{
-          tw.staggerTo(li, .3, {x:'0%', opacity:1}, .1)
-        }, 500)
-          
-        })
-        
-        
     },
     methods:{
       animation : function (){
-     
         const tw = TweenMax
         const li = document.querySelector('.list_articles').childNodes   
+       
         console.log(li)
-          tw.staggerTo(li, .3, {x:'0%'}, .1)
-     
-
+          tw.staggerTo(li, .3, {x:'0%', opacity: 1}, .1)
       }
-    }
+    },
+    updated() {
+      this.animation()
+    },
   }
 </script>
 <style lang="scss">
