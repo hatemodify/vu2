@@ -1,7 +1,12 @@
 <template>
   <div id="app">
     <appHeader></appHeader>
-    <router-view/>
+    <div id="content">
+      <div class="search_form"></div>
+      <div class="inner">
+        <router-view/>
+      </div>      
+    </div>
     <appFooter></appFooter>
   </div>
 </template>
@@ -17,7 +22,7 @@ export default {
   }
 }
 </script>
-
 <style lang="scss">
 @import "assets/css/reset.css";
+@import "assets/css/common.scss";
 </style>

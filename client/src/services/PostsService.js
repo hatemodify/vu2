@@ -11,7 +11,7 @@ export default {
     return Api().get('news')
   },
   searchList (params) {
-    return Api().get('news/search/' + params.query, params)
+    return Api().get('/search/' + params.query, params)
   },
   addScrap (params) {
     return Api().put('scrap', params)

@@ -57,7 +57,7 @@ app.get('/news', (req, res) => {
     .catch(err => res.send('Ops, something has gone wrong'));
 });
 
-app.get('/news/search/:query', (req, res) => {
+app.get('/search/:query', (req, res) => {
   const query = req.params.query;
   console.log(query);
   getNewsSearch(query)

@@ -8,9 +8,8 @@ import { TweenMax } from 'gsap/TweenMax'
 import VueLodash from 'vue-lodash'
 Vue.config.productionTip = false
 
-
-
 /* eslint-disable no-new */
+
 new Vue({
   el: '#app',
   router,

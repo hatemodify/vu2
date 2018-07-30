@@ -29,7 +29,8 @@ export default new Vuex.Store({
     LOGOUT ({commit}) {
       axios.defaults.headers.common['Authorization'] = undefined
       commit('LOGOUT')
-    }
+    },
+    
   }
 })
 

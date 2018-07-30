@@ -29,7 +29,7 @@ export default new Router({
   mode: 'history',
   routes: [
     {
-      path: '/news/search/:query',
+      path: '/search/:query',
       name: 'Search',
       component: Search
     },

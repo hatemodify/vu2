@@ -48,7 +48,7 @@ import bgEntertainment from '../assets/images/bg_entertainment.png'
     methods:{
       animation : function (){
         const tw = TweenMax
-        const li = document.querySelector('.list_category').childNodes                
+        const li = document.querySelector('.list_category').childNodes
         return{
           loadAnimation: () =>{
             tw.staggerTo(li, .8, {rotationX:0, opacity:1}, .1)
