@@ -15,7 +15,7 @@
           <router-link to="/categorylist">찾아보기</router-link>
         </li>
         <li>
-          <router-link to="/categorylist">마이페이지</router-link>
+          <router-link to="/login">마이페이지</router-link>
         </li>
       </ul>
     </nav>
