@@ -9,7 +9,7 @@
           <router-link to="/categorylist">카테고리</router-link>
         </li>
         <li>
-          <router-link to="/categorylist">포스팅</router-link>
+          <router-link to="/posts">포스트</router-link>
         </li>
         <li>
           <router-link to="/categorylist">찾아보기</router-link>

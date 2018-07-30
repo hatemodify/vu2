@@ -14,7 +14,7 @@
       <fieldset>검색폼</fieldset>    
       <input type="text" v-model="searchQuery">
       <span style="color:#fff">{{searchQuery}}</span>
-      <button class="btn_search" @click.prevent="onsubmit()"></button>
+      <button class="btn_search" @click.prevent="searchEvt"></button>
     </form>
     <aside class="side_menu">
       <nav class="side_nav">
@@ -39,9 +39,8 @@ export default {
         ? appHeader.classList.add("active")
         : appHeader.classList.remove("active");
     },
-    onsubmit (e){
-      console.log(this.searchQuery)      
-      this.$router.push(`/search/${this.searchQuery}`)
+    searchEvt (){            
+      !this.searchQuery ? alert('검색어를 입력해 주세요') : this.$router.push(`/search/${this.searchQuery}`)      
     }
   }
 };
