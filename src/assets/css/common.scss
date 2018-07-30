@@ -72,6 +72,50 @@
       background: #fff;
     }
   }
+  
+.search_form {
+  position: relative;
+  width: calc(100% + 14px);
+  height: 0;
+  overflow: hidden;
+  transition: cubic-bezier(0.215, 0.610, 0.355, 1) .3s;
+  &.on{
+    height: auto;
+    margin: 20px 0;
+    .inp_search{
+      width: 100%;
+    }
+    .btn_search{
+      opacity: 1;
+    }
+  }
+  .inp_search {
+    display: block;
+    border: 1px solid #ededed;
+    width: 0%;
+    height: 40px;
+    text-indent: 10px;
+    font-size: 15px;
+    color: #555;
+    outline: none;
+    transition-delay: .3s;
+    transition: cubic-bezier(0.215, 0.610, 0.355, 1) .4s;
+  }
+  .btn_search {
+    position: absolute;
+    outline: none;
+    right: 10px;
+    top: 8px;
+    width: 30px;
+    height: 30px;
+    opacity: .5;
+    background: url('https://image.flaticon.com/icons/svg/149/149309.svg') no-repeat;
+    background-size: 25px 25px;
+    opacity: 0;
+    transition-delay: 3s;
+    transition: cubic-bezier(0.215, 0.610, 0.355, 1) .3s;
+  }
+}
 }
 #appNav{
   position: fixed;
@@ -89,6 +133,7 @@
     width: 20%;
     text-align: center;
     line-height: 41px;
+    color: #fff;
     a{
       display: block;
       color: #fff;

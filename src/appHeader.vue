@@ -10,10 +10,9 @@
         <span class="ico_fead ico_menu"></span>
       </button>
     </div>
-    <form class="search_form">    
-      <fieldset>검색폼</fieldset>    
-      <input type="text" v-model="searchQuery">
-      <span style="color:#fff">{{searchQuery}}</span>
+    <form class="search_form" v-bind:class="{on:isActive}">    
+      <legend>검색폼</legend>
+      <input type="text" class="inp_search" v-model="searchQuery" placeholder="Search...">
       <button class="btn_search" @click.prevent="searchEvt"></button>
     </form>
     <aside class="side_menu">
