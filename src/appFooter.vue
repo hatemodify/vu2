@@ -23,14 +23,14 @@
 export default {
   data() {
     return {
-      isActive: false
+      searchState: false
     };
   },
   methods: {
     activeSearch: function() {
       const appHeader = document.querySelector('.search_form');
-      this.isActive = !this.isActive;
-      this.isActive
+      this.searchState = !this.searchState;
+      this.searchState
         ? appHeader.classList.add('on')
         : appHeader.classList.remove('on');
     },
