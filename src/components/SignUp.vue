@@ -1,9 +1,11 @@
 <template>
-  <div id="app">
-    <h3 class="tit_signup">Sign Up</h3>
-    <input v-model="id" placeholder="id">
-    <input type="password" v-model="password" placeholder="password">
-    <button @click="signUp">Sign Up</button>
+  <div class="user_cont">
+    <h3 class="tit_page tit_user">Sign Up</h3>
+    <div class="wrap_signup">
+      <input v-model="id" placeholder="아이디">
+      <input type="password" v-model="password" placeholder="비밀번호">
+      <button class="btn_user" @click="signUp">Sign Up</button>
+    </div>
   </div>
 </template>
 

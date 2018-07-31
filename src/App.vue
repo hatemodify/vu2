@@ -24,5 +24,5 @@ export default {
 </script>
 <style lang="scss">
 @import "assets/css/reset.css";
-@import "assets/css/common.scss";
+@import "./assets/css/common.scss";
 </style>

@@ -10,14 +10,11 @@
       </div>
     </a>
     <div class="wrap_info">
-      <div class="ov">
-        <span class="txt_cate"></span>
-        <strong class="tit_news">{{item.title}}</strong>
-        <div class="cf">
-          <span class="txt_source">{{item.source.name}}</span>
-          <span class="txt_date">{{convertDate(item.publishedAt)}}</span>
-          <a :href="item.url" class="link_more" target="_blank">자세히 볼래요 </a>
-        </div>
+      <span class="txt_source">{{item.source.name}}</span>        
+      <strong class="tit_news">{{item.title}}</strong>
+      <div class="cf">
+        <span class="txt_date">{{convertDate(item.publishedAt)}}</span>
+        <a :href="item.url" class="link_more" target="_blank">자세히 볼래요 </a>
       </div>
     </div>
   </li>
@@ -50,8 +47,8 @@ export default {
     noImg.noImg()
   },
   methods: {
-    convertDate: function(date) {
-      return date.replace(/-/g, ".").slice(0, 10)
+    convertDate (date) {
+      return date.replace(/-|T/g, ".").slice(0, 16)
     },
   }
 };

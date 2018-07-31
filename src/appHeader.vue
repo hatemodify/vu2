@@ -1,5 +1,5 @@
 <template>
-  <header id="appHeader">
+  <header id="appHeader" ref="appHeader">
     <div class="inner">
       <h1 class="app_logo">
         <a href="/headline">
@@ -31,13 +31,16 @@ export default {
       searchState:false
     };
   },
+    watch:{
+    reSearch (){
+      this.searchQuery = '검색어를 입력하세요'
+    }
+  },
   methods: {
     activeMenu () {
-      const appHeader = document.getElementById("appHeader");
-      this.isActive = !this.isActive;
-      this.isActive
-        ? appHeader.classList.add("active")
-        : appHeader.classList.remove("active");
+      const appHeader = document.getElementById("appHeader")
+      this.isActive = !this.isActive
+      this.isActive ? appHeader.classList.add("active") : appHeader.classList.remove("active")
     },
     searchEvt (){            
       !this.searchQuery ? alert('검색어를 입력해 주세요') : this.$router.push(`/search/${this.searchQuery}`)      

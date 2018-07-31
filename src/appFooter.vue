@@ -12,9 +12,12 @@
           <router-link to="/posts">포스트</router-link>
         </li>
         <li @click="activeSearch">찾아보기</li>
-        <li>
-          <router-link to="/login">마이페이지</router-link>
+        <li v-if="chkLogin === 'null' ">
+          <router-link to="/login">로그인</router-link>
         </li>
+        <li v-else>
+          <router-link to="/mypage">마이페이지</router-link>
+        </li>        
       </ul>
     </nav>
   </footer>
@@ -23,16 +26,15 @@
 export default {
   data() {
     return {
-      searchState: false
+      searchState: false,
+      chkLogin: localStorage.accessToken
     };
   },
   methods: {
     activeSearch: function() {
-      const appHeader = document.querySelector('.search_form');
-      this.searchState = !this.searchState;
-      this.searchState
-        ? appHeader.classList.add('on')
-        : appHeader.classList.remove('on');
+      const searchForm = document.querySelector('.search_form');
+      this.searchState = !this.searchState
+      this.searchState ? searchForm.classList.add('on') : searchForm.classList.remove('on')
     },
   }
 };

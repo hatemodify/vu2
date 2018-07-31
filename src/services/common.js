@@ -6,5 +6,8 @@ export default {
         element.parentElement.classList.add('no_img')
       }
     })
+  },
+  convertDate (date) {
+    return date.replace(/-|T/g, ".").slice(0, 16)
   }
 }

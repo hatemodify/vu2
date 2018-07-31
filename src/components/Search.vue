@@ -34,6 +34,7 @@ export default {
     error => {alert(error)})
     console.log(this.result)
   },
+
   mounted () {
 
   },

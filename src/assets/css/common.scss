@@ -152,6 +152,48 @@
     z-index: -1;
     content:"";
   }
+  .tit_page{
+    position: fixed;
+    left: 50%;
+    top: 21px;
+    color: #fff;
+    font-size: 18px;
+    text-transform: uppercase;
+    background:#292929;
+    z-index: 100;
+    transform: translateX(-50%);
+    &.tit_user{
+      top: 190px;
+      font-size: 24px;
+      transform: translateX(0);
+      left: 14px;
+    }
+  }
+  .user_cont{
+    padding-top: 148px;
+    input{
+      width: 100%;
+      height: 50px;
+      text-indent: 10px;
+      border-bottom: 1px solid #ededed;
+    }
+    .btn_user{      
+      float: right;
+      width: 120px;
+      height: 40px;;
+      margin-top: 20px;
+      color: #fff;
+      background: #292929;
+      text-transform: capitalize
+    }
+  }
+  .link_util{
+    text-align: center;
+    font-size: 15px;
+    a{
+      color: #555;
+    }
+  }
 }
 #appfooter{
 
