@@ -304,4 +304,31 @@
 .category_cont{
   padding-top: 50px;
 }
-
+.wrap_inp{
+  margin-top: 40px;
+  strong{
+    display: block;
+    font-size: 15px;
+    margin-bottom: 10px;
+  }
+  label{
+    float: left;
+    width: 33.3333%;
+    line-height: 30px;
+    color: #555;
+    &:before{
+      content: "#";
+      padding-right: 3px;
+    }
+  }
+  input[type="checkbox"]{
+    position: absolute;
+    left: -9999px;
+    top: -9999px;
+    &:checked + label{
+      &:before{
+        color: #f00;
+      }
+    }
+  }
+}

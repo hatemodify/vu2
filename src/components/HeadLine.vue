@@ -1,7 +1,7 @@
 <template>
 <ul class="list_headline">
   <li v-for="item in headLine" :key="item.title">
-    <button class="btn_scrap"></button>
+    <button class="btn_scrap" :class="{'active': isActive}" @click="thisScrap(item)"></button>
     <a :href="item.url" class="link_item">
       <div class="wrap_thumb" v-if="item.urlToImage">
          <img :src="item.urlToImage" class="thumb_img" alt="">
@@ -24,11 +24,13 @@
 <script>
 import axios from 'axios';
 import noImg from '../services/common.js'
+import PostsService from '../services/PostsService.js'
 export default {
   name: "headline",
   data() {
     return {
       headLine: "",
+      isActive:false
     };
   },
   created(){
@@ -50,8 +52,20 @@ export default {
     convertDate (date) {
       return date.replace(/-|T/g, ".").slice(0, 16)
     },
-  }
-};
+    async thisScrap (val) {
+    const userId = localStorage.accessToken
+    if(userId !== 'null'){
+      await PostsService.addScrap({
+        scrap: val,
+        userId
+      })
+    }else{
+      alert('로그인 해주세요')
+      this.$router.push({ name: 'Login' })
+    }
+  }, 
+}
+}
 </script>
 <style lang="scss">
 @import "../assets/css/news.scss";

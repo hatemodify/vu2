@@ -12,18 +12,18 @@ import MyScraps from '@/components/MyScraps'
 import HeadLine from '@/components/HeadLine'
 import CategoryList from '@/components/CategoryList'
 import Category from '@/components/Category'
+import Interest from '@/components/Interest'
 
 Vue.use(Router)
 const requireAuth = () => (from, to, next) => {
   const isAuthenticated = false
-  if (isAuthenticated) return next()
-  next('/login?returnPath=mypage')
+  if (!isAuthenticated) return next()
+  next('/login')
 }
 
 const returnId = () =>{
   return localStorage.accessToken
 }
-
 
 export default new Router({
   mode: 'history',
@@ -88,6 +88,11 @@ export default new Router({
       path: '/category/:category',
       name: 'Category',
       component: Category
+    },
+    {
+      path: '/interest',
+      name: 'Interest',
+      component: Interest
     }
   ]
 })

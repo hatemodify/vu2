@@ -7,10 +7,12 @@ router.post('/signup', (req, res) => {
   // setting values
   const id = req.body.id;
   const password = req.body.password;
+  const interest = req.body.interest;
 
   const addUser = new User({
     id: id,
-    password: password
+    password: password,
+    interest: interest
   });
 
   // encryption 
@@ -57,7 +59,6 @@ router.post('/login', (req, res) => {
     res.json(user);
   });
 });
-
 
 
 module.exports = router;

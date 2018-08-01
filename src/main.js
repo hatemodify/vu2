@@ -6,6 +6,7 @@ import router from './router'
 import store from './store'
 import { TweenMax } from 'gsap/TweenMax'
 import VueLodash from 'vue-lodash'
+import axios from 'axios'
 Vue.config.productionTip = false
 
 /* eslint-disable no-new */

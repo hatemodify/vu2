@@ -1,6 +1,6 @@
 <template>
   <div class="user_cont">
-    <h2 class="tit_page tit_user">login</h2>
+    <h2 class="tit_user">login</h2>
     <div class="cf mb50">
       <input type="text" v-model="id" placeholder="아이디를 입력하세요">
       <input type="password" v-model="password" placeholder="비밀번호를 입력하세요">
@@ -43,7 +43,7 @@ export default {
         .catch(error => {
           alert(error)
         })
-      this.$router.push({ name: 'NewsList' })
+      this.$router.push({ name: 'Headline' })
     },
     logOut () {
       this.$store.dispatch('LOGOUT').then(() => this.$router.push('/'))

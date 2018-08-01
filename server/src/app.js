@@ -3,7 +3,7 @@ const bodyParesr = require('body-parser');
 const cors = require('cors');
 const morgan = require('morgan');
 const mongoose = require('mongoose');
-const Post = require('../models/post');
+const _ = require('lodash');
 const User = require('../models/user');
 const DB_SETTING = require('./dbsetting');
 
@@ -85,20 +85,36 @@ app.put('/scrap', (req, res) => {
 });
 
 app.get('/myscrap', (req, res) => {
-  const userId = req.headers.userid;
+  const userId = req.headers.authorization;
   console.log(userId)
-  User.find({id:userId} , (err, data) => {
+  User.find({
+    id: userId
+  }, (err, data) => {
     console.log(data)
-    if(err){
+    if (err) {
       console.log(err);
     }
     res.send({
-      data:data[0].scraps
-    })    
+      data: data[0].scraps
+    })
   }).sort({
     _id: -1
   });
 });
+
+app.get('/interest', (req , res) => {
+  const userId = req.headers.authorization;
+  User.find({
+    id: userId
+  }, (err, data) => {
+    if (err) {
+      console.log(err);
+    }
+    res.send({
+      data: data[0].interest
+    })
+  });
+})
 
 function getNewsList(cate) {
   return new Promise((resolve, reject) => {

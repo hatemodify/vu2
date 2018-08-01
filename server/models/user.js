@@ -5,7 +5,7 @@ const userModel = {
     type: String,
     required: [true, 'you have to insert id'],
     trim: true,
-    unique: [true, 'nested id'],
+    unique: [true, 'nested id']
   },
   password: {
     type: String,
@@ -20,7 +20,10 @@ const userModel = {
     type: Date,
     default: Date.now
   },
-  scraps: [],
+  scraps: {
+    type: Array
+  },
+  interest: [],
   likes: [],
   dislikes: [],
   wards: [],

@@ -37,6 +37,7 @@ export default new Vuex.Store({
 const enhanceAccessToeken = () => {
   const {accessToken} = localStorage
   if (!accessToken) return
-  axios.defaults.headers.common['userId'] = `${accessToken}`
+  axios.defaults.headers.common['Authorization'] = `${accessToken}`
+  // console.log(axios.defaults.headers)  
 }
-// enhanceAccessToeken()
+enhanceAccessToeken()

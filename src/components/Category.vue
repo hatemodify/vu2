@@ -34,9 +34,8 @@ import VueLodash from 'vue-lodash'
       }
     },
     mounted () {
-
     },
-    created: function(){           
+    created: function(){    
       axios
         .get(`https://newsapi.org/v2/top-headlines?country=kr&category=${this.category}&apiKey=602cd3b6051a451d8e99935b8e7cad01`)
         .then(response => {this.articles = response.data.articles},
