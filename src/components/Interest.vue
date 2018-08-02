@@ -1,13 +1,14 @@
 <template>
-<div style="color:#fff;">
-  <ul v-for="item in articles" :key="item.title">
-    <li>
-      {{item}}
-    </li>
-  </ul>
-  {{articles}}
-</div>
-
+  <div class="intrest_cont">
+    <div v-for="(item, index) in articles" :key="index">
+      <strong>{{interest[index]}}</strong>
+      <ul class="">
+        <li v-for="aa in item">
+          {{aa.title}}
+        </li>
+      </ul>
+    </div>
+  </div>
 </template>
 
 <script>
@@ -17,7 +18,7 @@ import axios from 'axios'
       return{
         userId : localStorage.accessToken,
         interest: [],
-        articles: {},
+        articles: [],
         len:''
       }
     },
@@ -47,7 +48,9 @@ import axios from 'axios'
           .get(`https://newsapi.org/v2/top-headlines?country=kr&${item}=${this.category}&apiKey=602cd3b6051a451d8e99935b8e7cad01`)
           .then(response => {
             const data = response.data.articles
-            this.articles[item] = new Object(data) 
+            this.articles.push(data)
+            console.log(this.articles)
+            // this.articles[item] = new Object(data) 
           },
           error => {alert(error)})
         })

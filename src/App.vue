@@ -19,7 +19,7 @@ export default {
   components: {
     appHeader,
     appFooter
-  }
+  }  
 }
 </script>
 <style lang="scss">

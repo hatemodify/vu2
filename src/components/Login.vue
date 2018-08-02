@@ -5,7 +5,7 @@
       <input type="text" v-model="id" placeholder="아이디를 입력하세요">
       <input type="password" v-model="password" placeholder="비밀번호를 입력하세요">
       <button class="btn_user" @click="logIn(id)" v-if="chkLogin == 'null'">login</button>
-      <button class="btn_user" @click="logOut(id)" v-else>logout</button>    
+      <button class="btn_user" @click="logOut()" v-else>logout</button>    
     </div>    
     <div class="link_util">
       <router-link to="/signup">회원가입</router-link> / <router-link to="/find">아이디찾기</router-link>
