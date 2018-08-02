@@ -47,6 +47,10 @@ export default {
   },
   updated() {
     noImg.noImg()
+    
+  },
+  mounted (){
+    this.infiniteScroll()
   },
   methods: {
     convertDate (date) {
@@ -64,7 +68,30 @@ export default {
       this.$router.push({ name: 'Login' })
     }
   }, 
-}
+  infiniteScroll () {
+    window.addEventListener('scroll' , () =>{
+      const windowHeight = window.outerHeight
+      const app = document.getElementById('app')
+      const appHeight = app.clientHeight
+      const scrollTop = window.scrollY
+      if(scrollTop > appHeight - windowHeight){
+        this.getHeadline()
+      }
+    })
+  },
+  getHeadline () {
+    axios
+      .get('https://newsapi.org/v2/top-headlines?country=kr&pageSize=40&apiKey=602cd3b6051a451d8e99935b8e7cad01')
+      .then(
+        response => {
+          this.headLine = response.data.articles
+        },
+        error => {
+          alert(error)
+        }
+      )
+    }
+  }
 }
 </script>
 <style lang="scss">

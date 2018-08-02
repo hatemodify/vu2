@@ -34,6 +34,7 @@ import VueLodash from 'vue-lodash'
       }
     },
     mounted () {
+      this.infiniteScroll()
     },
     created: function(){    
       axios
@@ -49,6 +50,22 @@ import VueLodash from 'vue-lodash'
         console.log(li)
           tw.staggerTo(li, .3, {x:'0%', opacity: 1}, .1)
       }
+    },
+    methods:{
+        infiniteScroll () {
+        window.addEventListener('scroll' , () =>{
+          const windowHeight = window.outerHeight
+          const app = document.getElementById('app')
+          const appHeight = app.clientHeight
+          const scrollTop = window.scrollY
+          if(scrollTop > appHeight - windowHeight){
+            axios
+              .get(`https://newsapi.org/v2/top-headlines?country=kr&pageSize=40&category=${this.category}&apiKey=602cd3b6051a451d8e99935b8e7cad01`)
+              .then(response => {this.articles = response.data.articles},
+              error => {alert(error)})
+          }
+        })
+      },
     },
     updated() {
       // this.animation()
