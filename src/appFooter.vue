@@ -12,11 +12,11 @@
           <router-link to="/posts">포스트</router-link>
         </li>
         <li @click="activeSearch">찾아보기</li>
-        <li v-if="chkLogin === 'null'">
-          <router-link to="/login">로그인</router-link>
+        <li v-if="chkLogin !== 'null'">                    
+          <router-link to="/mypage">마이페이지</router-link>
         </li>
         <li v-else>
-          <router-link to="/mypage">마이페이지</router-link>
+          <router-link to="/login">로그인</router-link>
         </li>        
       </ul>
     </nav>
@@ -27,14 +27,18 @@ export default {
   data() {
     return {
       searchState: false,
-      chkLogin: this.$store.state
+      chkLogin: localStorage.accessToken
     };
   },
   mounted(){
     console.log(this.chkLogin)
   },
   updated(){
-
+    if (this.chkLogin == null){
+      console.log('a')
+    }else{
+      console.log('b')
+    }
   },
   methods: {
     activeSearch: function() {
