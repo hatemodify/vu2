@@ -7,8 +7,6 @@ const _ = require('lodash');
 const User = require('../models/user');
 const DB_SETTING = require('./dbsetting');
 
-
-
 const NewsAPI = require('newsapi');
 const newsapi = new NewsAPI('602cd3b6051a451d8e99935b8e7cad01');
 
@@ -33,7 +31,7 @@ app.use('/posts', require('../routes/post'));
 
 
 app.get('/news', (req, res) => {
-  console.log(req.headers)
+  console.log(req.headers);
   Promise.all([
       getNewsList(`business`),
       getNewsList(`sports`),
@@ -102,17 +100,33 @@ app.get('/myscrap', (req, res) => {
   });
 });
 
-app.get('/interest', (req , res) => {
+app.get('/interest', (req, res) => {
   const userId = req.headers.authorization;
+
   User.find({
     id: userId
   }, (err, data) => {
     if (err) {
       console.log(err);
     }
-    res.send({
-      data: data[0].interest
-    })
+    let tempArr = []
+    data[0].interest.forEach((item) => {
+      newsapi.v2.topHeadlines({
+        category: item,
+        language: 'ko',
+        country: 'kr',
+        pageSize: 1
+      }).then(response => {
+        tempArr.push(response)
+        console.log(tempArr)
+        res.send(tempArr)
+      });
+    });
+
+    // res.send({
+    //   data: data[0].interest
+    // })
+
   });
 })
 
@@ -144,7 +158,5 @@ function getNewsSearch(query) {
       .catch(err => console.log(err));
   });
 }
-
-
 
 app.listen(process.env.PORT || 9000);
