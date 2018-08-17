@@ -1,36 +1,39 @@
 <template>
-  <div class="intrest_cont">
-    <div class="section_cate" v-for="(news, index) in listInterest" :key="index">      
-      <strong class="tit_cate">{{interest[index]}}</strong>      
+  <div class="interest_cont">
+    <div class="section_cate" v-for="(key, index) in listInterest" :key="index">      
+      <h3 class="tit_cate">{{key.categoryName}}</h3>
       <ul class="list_interest">
-        <li v-for="item in news" :key="item.id">
+        <li v-for="item in key" :key="item.id">
           <a :href="item.url">
             <figure class="wrap_thumb" v-if="item.urlToImage" v-bind:style="{ backgroundImage: 'url(' + item.urlToImage + ')' }">
             </figure>
-              <div class="wrap_thumb no_img" v-else>
+            <div class="wrap_thumb no_img" v-else>
             </div>
             <div class="wrap_info">
-              <strong class="news_subject">{{item.title}}</strong>
-              <!-- <p class="news_desc">{{item.description}}</p> -->
-              <!-- <span class="txt_source">{{item.source.name}}</span> -->
-              <span class="txt_date">{{item.publishedAt}}</span>
+              <span class="txt_source">{{item.source.name}}</span>        
+              <strong class="tit_news">{{item.title}}</strong>
+              <div class="cf">
+                <span class="txt_date">{{comm.convertDate(item.publishedAt)}}</span>
+                <a :href="item.url" class="link_more" target="_blank">자세히 볼래요 </a>
+              </div>
             </div>
           </a>
         </li>
-      </ul> -->
+      </ul> 
     </div>
   </div>
 </template>
 
 <script>
 import axios from "axios";
+import comm from "../services/common.js";
 export default {
   data() {
     return {
       userId: localStorage.accessToken,
-      interest: [],
+      interest: "",
       listInterest: [],
-      len: ""
+      comm: comm
     };
   },
   created() {
@@ -43,8 +46,6 @@ export default {
         .then(
           () => {
             this.getInterest(this.interest);
-            this.len = this.interest.length;
-            console.log(this.interest);
           },
           error => {
             console.log(error);
@@ -52,15 +53,9 @@ export default {
         );
     }
   },
-  beforeMount() {},
-  mounted() {},
   methods: {
     getInterest(arr) {
       arr.forEach((item, index) => {
-        console.log(item);
-        console.log(
-          `https://newsapi.org/v2/top-headlines?country=kr&category=${item}&apiKey=602cd3b6051a451d8e99935b8e7cad01`
-        );
         axios
           .get(
             `https://newsapi.org/v2/top-headlines?country=kr&category=${item}&apiKey=602cd3b6051a451d8e99935b8e7cad01`
@@ -68,9 +63,8 @@ export default {
           .then(
             response => {
               const data = response.data.articles;
+              data.categoryName = item;
               this.listInterest.push(data);
-              console.log(this.listInterest.length);
-              // this.articles[item] = new Object(data)
             },
             error => {
               alert(error);
@@ -81,7 +75,6 @@ export default {
   }
 };
 </script>
-
 <style lang="scss">
 @import "../assets/css/news.scss";
 </style>

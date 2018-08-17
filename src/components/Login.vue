@@ -10,44 +10,68 @@
     <div class="link_util">
       <router-link to="/signup">회원가입</router-link> / <router-link to="/find">아이디찾기</router-link>
     </div>
+        {{test}}
+        {{root}}
   </div>
-    
 </template>
 <script>
-import UserService from '@/services/UserService'
+import UserService from "@/services/UserService";
+import axios from "axios";
 export default {
-  data () {
+  data() {
     return {
-      id: '',
-      password: '',
-      msg: '',
-      url: '/signup',
-      chkLogin: localStorage.accessToken
-    }
+      id: "",
+      password: "",
+      msg: "",
+      url: "/signup",
+      chkLogin: localStorage.accessToken,
+      test: "",
+      root: process.env.ROOT
+    };
+  },
+  mounted() {
+    console.log(process.env);
+  },
+  created() {
+    axios
+      .get(`${process.env.ROOT_API}/member`)
+      .then(response => {
+        console.log(response);
+        this.test = response.data.member;
+      })
+      .catch(err => {
+        console.log(err);
+        alert(err);
+      });
   },
   methods: {
-    async logIn (id, password) {
+    async logIn(id, password) {
       await UserService.chekLogin({
         id: this.id,
         password: this.password
       })
         .then(
           response => {
-            alert('success login')
-            this.$store.dispatch('LOGIN', id)
+            alert("success login");
+            this.$store.dispatch("LOGIN", id);
           },
           error => {
-            alert(error.response.data.error)
+            alert(error.response);
+            console.log(error.response);
+            // this.$router.push({ name: "Login" });
           }
         )
         .catch(error => {
-          alert(error)
-        })
-      this.$router.push({ name: 'Headline' })
+          alert(error.response);
+          console.log(error.response);
+        });
+      this.$router.push({ name: "Headline" });
     },
-    logOut () {
-      this.$store.dispatch('LOGOUT').then(() => this.$router.push('/'))
+    logOut() {
+      this.$store
+        .dispatch("LOGOUT")
+        .then(() => this.$router.push({ name: "Headline" }));
     }
   }
-}
+};
 </script>

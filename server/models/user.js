@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
-const userModel = {  
+const userModel = {
   id: {
     type: String,
     required: [true, 'you have to insert id'],

@@ -4,32 +4,34 @@
 
 
 <script>
-import PostsService from '@/services/PostsService'
-import axios from 'axios'
+import PostsService from "@/services/PostsService";
+import axios from "axios";
 export default {
-  name: 'MyScraps',
-  data (){
+  name: "MyScraps",
+  data() {
     return {
       userId: localStorage.accessToken,
-      scrapList: '',
-    }
+      scrapList: ""
+    };
   },
-  mounted () {
-    this.getScrap()
+  created() {
+    this.getScrap();
     // console.log(axios.defaults.headers)
   },
-  methods: {    
-    async getScrap () {
-      axios.get('http://localhost:9000/myscrap').then((response) => {
-        this.scraps = response.data
-        console.log(response)
-      }, (error) => {
-        console.log(error)
-      })
-    },
+  methods: {
+    async getScrap() {
+      axios.get("http://localhost:9000/myscrap").then(
+        response => {
+          this.scraps = response.data;
+          console.log(response);
+        },
+        error => {
+          console.log(error);
+        }
+      );
+    }
   }
-}
-
+};
 </script>
 <style lang="scss">
 @import "../assets/css/news.scss";

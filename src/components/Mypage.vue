@@ -4,6 +4,8 @@
     <ul class="list_mypage">
       <li>
         <router-link to="/myscrap">스크랩</router-link>
+      </li>
+      <li>
         <router-link to="/interest">관심사 모아보기</router-link>
       </li>
     </ul>
@@ -13,26 +15,19 @@
 
 
 <script>
-  export default {
-    data (){
-      return{
-
-      }
-    },
-    methods:{
-      logOut () {
-        this.$store.dispatch('LOGOUT').then(() => this.$router.push('/'))
-      }
-    },
-    mounted (){
-      
-    },
-    created (){
-      const authorization = localStorage.accessToken;
-      console.log(authorization)
-    },
-    updated (){
-
+export default {
+  data() {
+    return {};
+  },
+  methods: {
+    logOut() {
+      this.$store.dispatch("LOGOUT").then(() => this.$router.push("/"));
     }
-  }
+  },
+  mounted() {},
+  created() {
+    const authorization = localStorage.accessToken;
+  },
+  updated() {}
+};
 </script>

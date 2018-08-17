@@ -27,22 +27,23 @@ export default {
   data() {
     return {
       searchState: false,
-      chkLogin: localStorage.accessToken,      
+      chkLogin: localStorage.accessToken
     };
   },
-  mounted(){
-    localStorage.accessToken !== 'null' ? this.$store.state.accessToken = localStorage.accessToken : null    
-    console.log(this.$router.push)
+  mounted() {
+    localStorage.accessToken !== "null"
+      ? (this.$store.state.accessToken = localStorage.accessToken)
+      : null;
   },
-  updated(){
-
-  },
+  updated() {},
   methods: {
     activeSearch: function() {
-      const searchForm = document.querySelector('.search_form');
-      this.searchState = !this.searchState
-      this.searchState ? searchForm.classList.add('on') : searchForm.classList.remove('on')
-    },
+      const searchForm = document.querySelector(".search_form");
+      this.searchState = !this.searchState;
+      this.searchState
+        ? searchForm.classList.add("on")
+        : searchForm.classList.remove("on");
+    }
   }
 };
 </script>

@@ -90,7 +90,6 @@ app.get('/myscrap', (req, res) => {
   User.find({
     id: userId
   }, (err, data) => {
-    console.log(data)
     if (err) {
       console.log(err);
     }
@@ -102,19 +101,39 @@ app.get('/myscrap', (req, res) => {
   });
 });
 
-app.get('/interest', (req , res) => {
-  const userId = req.headers.authorization;
-  User.find({
-    id: userId
-  }, (err, data) => {
+app.get('/interest', (req, res) => {
+  if (req.headers.authorization) {
+    const userId = req.headers.authorization;
+    User.find({
+      id: userId
+    }, (err, data) => {
+      if (err) {
+        console.log(err);
+      }
+      res.send({
+        data: data[0].interest
+      })
+    });
+  } else {
+    res.send({
+      msg: 'login plz'
+    })
+  }
+})
+
+app.get('/member', (req, res) => {
+  User.find({}, (err, member) => {
     if (err) {
       console.log(err);
     }
     res.send({
-      data: data[0].interest
-    })
+      member: member
+    });
   });
-})
+});
+
+
+
 
 function getNewsList(cate) {
   return new Promise((resolve, reject) => {

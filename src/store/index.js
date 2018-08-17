@@ -12,21 +12,25 @@ export default new Vuex.Store({
 
   },
   mutations: {
-    LOGIN (state, id) {
+    LOGIN(state, id) {
       state.accessToken = id
       localStorage.accessToken = id
     },
-    LOGOUT (state) {
+    LOGOUT(state) {
       state.accessToken = null
       localStorage.accessToken = null
     }
   },
   actions: {
-    LOGIN ({commit}, id) {
-      commit('LOGIN', id) 
-      // enhanceAccessToeken(localStorage)    
+    LOGIN({
+      commit
+    }, id) {
+      commit('LOGIN', id)
+      enhanceAccessToeken()
     },
-    LOGOUT ({commit}) {
+    LOGOUT({
+      commit
+    }) {
       axios.defaults.headers.common['Authorization'] = undefined
       commit('LOGOUT')
     },
@@ -34,9 +38,11 @@ export default new Vuex.Store({
 })
 
 const enhanceAccessToeken = () => {
-  const {accessToken} = localStorage
+  const {
+    accessToken
+  } = localStorage
   if (!accessToken) return
   axios.defaults.headers.common['Authorization'] = `${accessToken}`
-  // console.log(axios.defaults.headers)  
+  console.log(axios.defaults.headers)
 }
 enhanceAccessToeken()

@@ -13,7 +13,7 @@
       <span class="txt_source">{{item.source.name}}</span>        
       <strong class="tit_news">{{item.title}}</strong>
       <div class="cf">
-        <span class="txt_date">{{convertDate(item.publishedAt)}}</span>
+        <span class="txt_date">{{comm.convertDate(item.publishedAt)}}</span>
         <a :href="item.url" class="link_more" target="_blank">자세히 볼래요 </a>
       </div>
     </div>
@@ -23,14 +23,15 @@
 
 <script>
 import axios from "axios";
-import noImg from "../services/common.js";
+import comm from "../services/common.js";
 import PostsService from "../services/PostsService.js";
 export default {
   name: "headline",
   data() {
     return {
       headLine: "",
-      isActive: false
+      isActive: false,
+      comm: comm
     };
   },
   created() {
@@ -48,15 +49,12 @@ export default {
       );
   },
   updated() {
-    noImg.noImg();
+    comm.noImg();
   },
   mounted() {
     this.infiniteScroll();
   },
   methods: {
-    convertDate(date) {
-      return date.replace(/-|T/g, ".").slice(0, 16);
-    },
     async thisScrap(val) {
       const userId = localStorage.accessToken;
       if (userId !== "null") {
