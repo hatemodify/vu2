@@ -39,7 +39,7 @@ export default {
   created() {
     if (this.userId) {
       axios
-        .get("http://localhost:9000/interest")
+        .get(`${process.env.ROOT_API}/interest`)
         .then(response => {
           this.interest = response.data.data;
         })
@@ -72,6 +72,15 @@ export default {
           );
       });
     }
+  },
+  updated() {
+    const tit = document.querySelectorAll(".tit_cate");
+
+    window.addEventListener("scroll", () => {
+      tit.forEach(item => {
+        console.log(item.offsetTop);
+      });
+    });
   }
 };
 </script>

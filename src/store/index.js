@@ -26,6 +26,7 @@ export default new Vuex.Store({
       commit
     }, id) {
       commit('LOGIN', id)
+
       enhanceAccessToeken()
     },
     LOGOUT({
