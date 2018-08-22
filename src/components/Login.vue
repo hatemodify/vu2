@@ -3,7 +3,7 @@
     <h2 class="tit_user">login</h2>
     <div class="cf mb50">
       <input type="text" v-model="id" placeholder="아이디를 입력하세요">
-      <input type="password" v-model="password" placeholder="비밀번호를 입력하세요">
+      <input type="password" v-model="password" placeholder="비밀번호를 입력하세요" @keyup.enter="logIn(id)">
       <button class="btn_user" @click="logIn(id)" v-if="chkLogin == 'null'">login</button>
       <button class="btn_user" @click="logOut()" v-else>logout</button>    
     </div>    
@@ -32,18 +32,7 @@ export default {
   mounted() {
     console.log(process.env);
   },
-  created() {
-    axios
-      .get(`${process.env.ROOT_API}/member`)
-      .then(response => {
-        console.log(response);
-        this.test = response.data.member;
-      })
-      .catch(err => {
-        console.log(err);
-        alert(err);
-      });
-  },
+  created() {},
   methods: {
     async logIn(id, password) {
       await UserService.chekLogin({

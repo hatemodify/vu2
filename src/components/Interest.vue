@@ -1,7 +1,7 @@
 <template>
   <div class="interest_cont">
     <div class="section_cate" v-for="(key, index) in listInterest" :key="index">      
-      <h3 class="tit_cate">{{key.categoryName}}</h3>
+      <h3 class="tit_cate" ref="catename">{{key.categoryName}}</h3>
       <ul class="list_interest">
         <li v-for="item in key" :key="item.id">
           <a :href="item.url">
@@ -28,6 +28,7 @@
 import axios from "axios";
 import comm from "../services/common.js";
 export default {
+  template: {},
   data() {
     return {
       userId: localStorage.accessToken,
@@ -52,6 +53,13 @@ export default {
           }
         );
     }
+
+    window.addEventListener("scroll", () => {
+      this.$el.querySelectorAll(".tit_cate").forEach(item => {
+        // item.offsetTop < 250 ? (item.style.color = "#fff") : "";
+        console.log(item.offsetTop);
+      });
+    });
   },
   methods: {
     getInterest(arr) {
@@ -73,8 +81,8 @@ export default {
       });
     }
   },
-  updated() {
-    const tit = document.querySelectorAll(".tit_cate");
+  mounted() {
+    const tit = document.querySelectorAll(".section_cate");
 
     window.addEventListener("scroll", () => {
       tit.forEach(item => {
