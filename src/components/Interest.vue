@@ -54,12 +54,15 @@ export default {
         );
     }
 
-    window.addEventListener("scroll", () => {
-      this.$el.querySelectorAll(".tit_cate").forEach(item => {
-        // item.offsetTop < 250 ? (item.style.color = "#fff") : "";
-        console.log(item.offsetTop);
-      });
-    });
+    // window.addEventListener("scroll", () => {
+    //   this.$el.querySelectorAll(".tit_cate").forEach(item => {
+    //     // item.offsetTop < 250 ? (item.style.color = "#fff") : "";
+    //     console.log(item.offsetTop);
+    //   });
+    // });
+    document.addEventListener('mousemove', (e) =>{
+      console.log(e)
+    })
   },
   methods: {
     getInterest(arr) {
@@ -82,13 +85,19 @@ export default {
     }
   },
   mounted() {
-    const tit = document.querySelectorAll(".section_cate");
 
+    const tit = document.querySelectorAll(".section_cate");
+  
     window.addEventListener("scroll", () => {
       tit.forEach(item => {
-        console.log(item.offsetTop);
+        // console.log(item.offsetTop);
       });
     });
+
+
+  },
+  updated(){
+    document.querySelector('.preloader').style.display ='none'
   }
 };
 </script>

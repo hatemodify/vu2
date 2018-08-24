@@ -12,7 +12,7 @@
           <router-link to="/posts">포스트</router-link>
         </li>
         <li @click="activeSearch">찾아보기</li>
-        <li v-if="this.$store.state.accessToken === null">                    
+        <li v-if="this.$store.state.accessToken === null">        
           <router-link to="/login">로그인</router-link>          
         </li>
         <li v-else>
@@ -20,6 +20,7 @@
         </li>        
       </ul>
     </nav>
+
   </footer>
 </template>
 <script>
@@ -27,7 +28,8 @@ export default {
   data() {
     return {
       searchState: false,
-      chkLogin: localStorage.accessToken
+      chkLogin: localStorage.accessToken,
+      loading: false
     };
   },
   mounted() {

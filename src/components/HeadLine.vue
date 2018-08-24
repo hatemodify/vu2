@@ -1,4 +1,10 @@
 <template>
+<div>
+    <div class="preloader" v-if="loading == false">
+      <span class="left"></span>
+      <span class="right"></span>
+      <span class="preloader_txt"></span>
+    </div>
 <ul class="list_headline">
   <li v-for="item in headLine" :key="item.title">
     <button class="btn_scrap" :class="{'active': isActive}" @click="thisScrap(item)"></button>
@@ -19,6 +25,7 @@
     </div>
   </li>
 </ul>
+</div>
 </template>
 
 <script>
@@ -31,7 +38,8 @@ export default {
     return {
       headLine: "",
       isActive: false,
-      comm: comm
+      comm: comm,
+      loading:false
     };
   },
   created() {
@@ -42,7 +50,8 @@ export default {
       .then(
         response => {
           this.headLine = response.data.articles;
-        },
+          this.loading = true
+        },        
         error => {
           alert(error);
         }
