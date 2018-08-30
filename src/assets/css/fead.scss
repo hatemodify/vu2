@@ -1,5 +1,5 @@
 @mixin icoPath {
-  background-image: url("../assets/images/ico_fead.png");
+  background-image: url("./assets/images/ico_fead.png");
 }
 
 @mixin lineClamp($num) {
@@ -13,7 +13,7 @@
 .no_img {
   height: 220px;
   border-right: 0 none;
-  background: url("../assets/images/no_img.png") no-repeat center;
+  background: url("./assets/images/no_img.png") no-repeat center;
   background-size: 80px auto;
   &:after {
     border: 1px solid rgba(0, 0, 0, 0.15) !important;
@@ -461,7 +461,7 @@
   left: 50%;
   transform:translate(-50%, -50%);
   z-index: 100;
-  background: url("../assets/images/preloader.png") no-repeat; 
+  background: url("./assets/images/preloader.png") no-repeat; 
   background-size: 100%;
   .preloader_txt{
     display: block;
@@ -469,14 +469,14 @@
     width: 42px;
     height: 16px;
     margin: auto;
-    background: url("../assets/images/preloader_txt.png") no-repeat; 
+    background: url("./assets/images/preloader_txt.png") no-repeat; 
     background-size: 100%;
   }
   .left{
     float: left;
     width: 30px;
     height: 100%;
-    background: url("../assets/images/l.png") no-repeat; 
+    background: url("./assets/images/l.png") no-repeat; 
     background-size: 100%;
   }
   .right{
@@ -485,7 +485,7 @@
     top: 0;
     width: 37px;
     height: 100%;
-    background: url("../assets/images/r.png") no-repeat right;    
+    background: url("./assets/images/r.png") no-repeat right;    
     background-size:100% 100%;
     animation:flip 1.8s infinite linear;
     transform-origin:0% 50%;
@@ -535,6 +535,3 @@
   }
 }
 
-[v-cloak] {
-  display: none;
-}

@@ -46,5 +46,5 @@ export default {
 </script>
 
 <style lang="scss">
-@import '../assets/css/news.scss';
+@import '../assets/css/fead.scss';
 </style>

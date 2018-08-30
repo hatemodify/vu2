@@ -6,9 +6,14 @@
           <input type="text" name="title" placeholder="TITLE" v-model="title">
         </div>
         <div>
-          <textarea rows="15" cols="15" placeholder="DESCRIPTION" v-model="description"></textarea>
+          <input type="file" id="file" @change="onFileChange">
         </div>
         <div>
+          <textarea rows="15" cols="15" placeholder="DESCRIPTION" v-model="description"></textarea>
+        </div>
+        <img :src="image">
+        <div>
+          <button class="" @click="submitFile()"></button>
           <button class="app_post_btn" @click="addPost">Add</button>
         </div>
       </div>
@@ -22,19 +27,48 @@ export default {
   data () {
     return {
       title: '',
-      description: ''
+      description: '',
+      image:'',
     }
   },
   methods: {
     async addPost () {
       await PostsService.addPost({
         title: this.title,
-        description: this.description
+        description: this.description,
+        files:this.image,
+    
       })
-      this.$router.push({ name: 'Posts' })
+          console.log(this.image)
+      // this.$router.push({ name: 'Posts' })
+    },
+     onFileChange(e) {
+        var files = e.target.files || e.dataTransfer.files;
+        if (!files.length)
+          return;
+        this.createImage(files[0]);
+      },
+      createImage(file) {
+        var image = new Image();
+        var reader = new FileReader();
+        var vm = this;
+
+        reader.onload = (e) => {
+          vm.image = e.target.result;
+          console.log(vm.image)
+        };
+        reader.readAsDataURL(file);   
+        
+      },
+      removeImage: function (e) {
+        this.image = '';
+      }
+    },
+    updated(){
+
     }
   }
-}
+
 </script>
 <style type="text/css">
 .form input, .form textarea {

@@ -104,6 +104,3 @@ export default {
   }
 };
 </script>
-<style lang="scss">
-@import "../assets/css/news.scss";
-</style>

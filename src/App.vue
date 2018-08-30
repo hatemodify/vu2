@@ -2,7 +2,6 @@
   <div id="app">
     <appHeader></appHeader>
     <div id="content">
-      <div class="search_form"></div>
       <div class="inner">
         <router-view/>
       </div>      
@@ -22,7 +21,9 @@ export default {
   },
 }
 </script>
+
 <style lang="scss">
-@import "assets/css/reset.css";
-@import "./assets/css/common.scss";
+@import "/assets/css/reset.css";
+@import "/assets/css/common.scss";
+@import "/assets/css/fead.scss";
 </style>

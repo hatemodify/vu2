@@ -64,6 +64,3 @@ import bgEntertainment from '../assets/images/bg_entertainment.png'
     }
   }
 </script>
- <style lang="scss">
-@import "../assets/css/news.scss";
- </style>

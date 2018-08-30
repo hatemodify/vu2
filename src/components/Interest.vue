@@ -86,21 +86,11 @@ export default {
   },
   mounted() {
 
-    const tit = document.querySelectorAll(".section_cate");
-  
-    window.addEventListener("scroll", () => {
-      tit.forEach(item => {
-        // console.log(item.offsetTop);
-      });
-    });
 
 
   },
   updated(){
-    document.querySelector('.preloader').style.display ='none'
+    
   }
 };
 </script>
-<style lang="scss">
-@import "../assets/css/news.scss";
-</style>

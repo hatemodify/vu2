@@ -10,7 +10,7 @@
         <span class="ico_fead ico_menu"></span>
       </button>
     </div>
-    <form class="search_form" v-bind:class="{on:searchState}">    
+    <form class="search_form" v-bind:class="{on:searchState}">
       <legend>검색폼</legend>
       <input type="text" class="inp_search" v-model="searchQuery" placeholder="Search...">
       <button class="btn_search" @click.prevent="searchEvt"></button>
