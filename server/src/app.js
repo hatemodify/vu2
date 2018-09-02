@@ -88,7 +88,6 @@ app.put("/scrap", (req, res) => {
 
 app.get("/myscrap", (req, res) => {
   const userId = req.headers.authorization;
-  console.log(userId);
   User.find(
     {
       id: userId
@@ -127,6 +126,28 @@ app.get("/interest", (req, res) => {
       msg: "login plz"
     });
   }
+});
+
+
+
+app.get('/mypage', (req, res)=>{
+  const userId = req.headers.authorization;
+  console.log(userId);
+  User.find(
+    {
+      id: userId
+    },
+    (err, data) => {
+      if (err) {
+        console.log(err);
+      }
+      res.send({
+        data: data[0]
+      });
+    }
+  ).sort({
+    _id: -1
+  });
 });
 
 app.get("/member", (req, res) => {
@@ -169,53 +190,21 @@ function getNewsSearch(query) {
   });
 }
 
-// const upload = (req, res) => {
-//   const deferred = Q.defer();
-//   const imagePath = '../../src/assets/images';
-//   const storage = multer.diskStorage({
-//     destination: (req, file, cb) => {
-//       cb(null, imagePath);
-//     },
-//     filename: (req, file, cb) => {
-//       file.uploadFile = {
-//         name: req.params.filename,
-//         ext: file.mimetype.split("/")[1]
-//       };
-//       cb(null, file.uploadedFile.name + "." + file.uploadedFile.ext);
-//     }
-//   });
-
-//   const upload = multer({ storage: storage }).single("file");
-//   upload(req, res, err => {
-//     if (err) deferred.reject();
-//     else deferred.resolve(req.file.uploadedFile);
-//   });
-//   return deferred.promise;
-// };
-
-// app.post("/:filename", (req, res, next) => {
-//   upload(req, res).then(
-//     file => {
-//       res.json(file);
-//       console.log(file)
-//     },
-//     err => {
-//       res.send(status).send(body);
-//     }
-//   );
-// });
-
 
 const storage = multer.diskStorage({
-  destination:(req,file,cb)=>{
-    cb(null, 'uploads/')
+  destination:  (req, file, cb) =>{
+    cb(null, '../src/upload/') // cb 콜백함수를 통해 전송된 파일 저장 디렉토리 설정
   },
-  filename: (req,file, db)=>{
-    cb(null, Date.now() + path.extname(file.originalname))
+  filename:  (req, file, cb) =>{
+    cb(null, file.originalname) // cb 콜백함수를 통해 전송된 파일 이름 설정
   }
-});
+})
+const upload = multer({ storage: storage })
 
-const upload = multer({storage:storage});
+app.post('/upload', upload.single('file'), (req,res)=>{
+  res.send('Uploaded:' + req.file);
+  console.log(req.file);  
+});
 
 
 

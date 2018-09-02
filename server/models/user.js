@@ -28,7 +28,11 @@ const userModel = {
   dislikes: [],
   wards: [],
   posts: [],
-  comments: []
+  comments: [],
+  profile:{
+    type:String, 
+    default:'noImg'
+  }
 };
 const userSchema = new Schema(userModel);
 

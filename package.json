@@ -1,7 +1,7 @@
 {
-  "name": "vue-test",
+  "name": "Fead",
   "version": "1.0.0",
-  "description": "A Vue.js project",
+  "description": "news & post",
   "author": "hatemodify <hatemodify@gmail.com>",
   "private": true,
   "scripts": {

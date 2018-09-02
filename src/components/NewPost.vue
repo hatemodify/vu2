@@ -6,7 +6,7 @@
           <input type="text" name="title" placeholder="TITLE" v-model="title">
         </div>
         <div>
-          <input type="file" id="file" @change="onFileChange">
+          <input type="file" name="file" ref="files" @change="onFileChange">
         </div>
         <div>
           <textarea rows="15" cols="15" placeholder="DESCRIPTION" v-model="description"></textarea>
@@ -14,7 +14,7 @@
         <img :src="image">
         <div>
           <button class="" @click="submitFile()"></button>
-          <button class="app_post_btn" @click="addPost">Add</button>
+          <button class="app_post_btn" @click="upload">Add</button>
         </div>
       </div>
   </div>
@@ -22,6 +22,7 @@
 
 <script>
 import PostsService from '@/services/PostsService'
+import axios from 'axios'
 export default {
   name: 'NewPost',
   data () {
@@ -32,12 +33,26 @@ export default {
     }
   },
   methods: {
+    upload(){
+      let formData = new FormData();    
+      formData.append('file',this.$refs.files.files[0], this.$refs.files.files[0].name )      
+      console.log(formData.files)
+      axios.post('http://localhost:9000/upload',
+        formData , {
+          headers:{
+            'Content-Type': 'multipart/form-data'
+          }
+      }).then(function(){
+        console.log('success');
+      }).catch(function(){
+        console.log('fail');
+      });
+    },
     async addPost () {
       await PostsService.addPost({
         title: this.title,
         description: this.description,
         files:this.image,
-    
       })
           console.log(this.image)
       // this.$router.push({ name: 'Posts' })
@@ -62,7 +77,14 @@ export default {
       },
       removeImage: function (e) {
         this.image = '';
-      }
+      },
+      handleFilesUpload(){
+        let uploadedFiles = this.$refs.files.files;
+        /*
+          Adds the uploaded file to the files array
+        */
+       console.log(uploadedFiles)
+      },
     },
     updated(){
 
