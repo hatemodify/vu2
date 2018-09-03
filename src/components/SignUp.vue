@@ -1,7 +1,7 @@
 <template>
   <div class="user_cont">
     <h3 class="tit_user">Sign Up</h3>
-    <div class="wrap_signup">
+    <div id="signupForm" class="wrap_signup">
       <div class="wrap_inp mt70">
         <strong>사용자 정보</strong>
         <input v-model="id" name="id" placeholder="아이디">
@@ -42,7 +42,7 @@
 
 <script>
 import UserService from "@/services/UserService";
-import axios from 'axios';
+import axios from "axios";
 export default {
   data: () => {
     return {
@@ -50,7 +50,8 @@ export default {
       password: "",
       interest: [],
       image: "",
-      profileImg: ""
+      profileImg: "",
+      formData: new FormData()
     };
   },
   methods: {
@@ -62,45 +63,45 @@ export default {
         alert("password 를 입력해주세요");
         return;
       } else {
-        // await UserService.addUser({
-        //   id: this.id,
-        //   password: this.password,
-        //   interest: this.interest
-        // });
-        let formData = new FormData();
-        formData.append(
-          "reg_profile",
-          this.$refs.reg_profile.files[0],
-          this.$refs.reg_profile.files[0].name
-        );
-        // formData.append("id", this.id, this, this.id);
-        // formData.append("password", this.password, this.password);
-        // formData.append("interest", this.interest, this.interest);
-        console.log(formData.files)
-         axios.post("http://localhost:9000/user/signup", formData, {
-            headers: {
-              "Content-Type": "multipart/form-data"
-            }
-          })
+        this.formData.append("id", this.id);
+        this.formData.append("password", this.password);
+        this.formData.append("interest", this.interest);
+        
+        const config = {
+          headers: { "Content-Type": "multipart/form-data" }
+        };
+        axios
+          .post("http://localhost:9000/user/signup", this.formData, config)
           .then(function() {
             console.log("success");
           })
           .catch(function() {
             console.log("fail");
           });
-          /*
-         this.$router.push({ name: "Login" });*/
+       
+         this.$router.push({ name: "Login" });
       }
+      console.log(this.interest)
     },
     onFileChange(e) {
       var files = e.target.files || e.dataTransfer.files;
       if (!files.length) return;
       this.createImage(files[0]);
+      this.formData.append(
+        "file",
+        this.$refs.reg_profile.files[0],
+        this.$refs.reg_profile.files[0].name
+      );
+      // this.formData.append(
+      //   "reg_profile",
+      //   this.$refs.reg_profile.files[0],
+      //   this.$refs.reg_profile.files[0].name
+      // );
     },
     createImage(file) {
-      var image = new Image();
-      var reader = new FileReader();
-      var vm = this;
+      const image = new Image();
+      const reader = new FileReader();
+      const vm = this;
 
       reader.onload = e => {
         vm.image = e.target.result;

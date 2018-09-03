@@ -21,6 +21,7 @@
 </template>
 
 <script>
+import axios from 'axios'
 import bgBusiness from '../assets/images/bg_business.png'
 import bgSports from '../assets/images/bg_sports.png'
 import bgHealth from '../assets/images/bg_health.png'

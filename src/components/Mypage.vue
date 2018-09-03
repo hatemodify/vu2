@@ -3,11 +3,11 @@
     <h2 class="tit_user">my page</h2>
     <figure class="profile">
       <div class="profile_wrap">
-        <figure v-if="userData.profile !== 'noImg'">
-          <img :src="require(`../upload/profile/${userData.profile}`)" />
-        </figure>  
-        <figure class="no_profile" v-else>
+        <figure class="no_profile" v-if="profileImg == 'noImg'">          
           <img src="~assets/images/no_profile.png" alt="">
+        </figure>  
+        <figure v-else>
+          <img :src="profileImgPath">
         </figure>
       </div>      
       <figcaption></figcaption>
@@ -26,11 +26,12 @@
 
 
 <script>
-import axios from 'axios'
+import axios from "axios";
 export default {
   data() {
     return {
-      userData:'',
+      profileImg: "",
+      profileImgPath: ""
     };
   },
   methods: {
@@ -41,14 +42,16 @@ export default {
   mounted() {},
   created() {
     const authorization = localStorage.accessToken;
-      axios.get("http://localhost:9000/mypage").then(
-        response => {
-          this.userData = response.data.data;
-        },
-        error => {
-          console.log(error);
-        }
-      );
+    axios.get("http://localhost:9000/mypage").then(
+      response => {
+        const userData = response.data.data;
+        const profileImg = userData.profile;
+        this.profileImgPath = `require(../upload/profile/${profileImg})`;
+      },
+      error => {
+        console.log(error);
+      }
+    );
   },
   updated() {}
 };

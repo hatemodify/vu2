@@ -57,10 +57,8 @@ export default {
         const scrollTop = window.scrollY
                 
         if(scrollTop > appHeight - windowHeight){
-
           this.cnt += 1
           console.log(this.cnt)
-
         axios
           .get(`https://newsapi.org/v2/everything?language=ko&q=${this.searchQuery}&apiKey=602cd3b6051a451d8e99935b8e7cad01&pageSize=${cnt * 20}`)
      

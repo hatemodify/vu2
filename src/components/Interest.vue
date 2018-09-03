@@ -1,5 +1,10 @@
 <template>
   <div class="interest_cont">
+    <div class="preloader" v-if="loading == false">
+      <span class="left"></span>
+      <span class="right"></span>
+      <span class="preloader_txt"></span>
+    </div>
     <div class="section_cate" v-for="(key, index) in listInterest" :key="index">      
       <h3 class="tit_cate" ref="catename">{{key.categoryName}}</h3>
       <ul class="list_interest">
@@ -34,7 +39,8 @@ export default {
       userId: localStorage.accessToken,
       interest: "",
       listInterest: [],
-      comm: comm
+      comm: comm,
+      loading:false
     };
   },
   created() {
@@ -47,6 +53,7 @@ export default {
         .then(
           () => {
             this.getInterest(this.interest);
+            this.loading = true
           },
           error => {
             console.log(error);
@@ -60,13 +67,11 @@ export default {
     //     console.log(item.offsetTop);
     //   });
     // });
-    document.addEventListener('mousemove', (e) =>{
-      console.log(e)
-    })
   },
   methods: {
     getInterest(arr) {
       arr.forEach((item, index) => {
+        console.log(item);
         axios
           .get(
             `https://newsapi.org/v2/top-headlines?country=kr&category=${item}&apiKey=602cd3b6051a451d8e99935b8e7cad01`
@@ -84,13 +89,7 @@ export default {
       });
     }
   },
-  mounted() {
-
-
-
-  },
-  updated(){
-    
-  }
+  mounted() {},
+  updated() {}
 };
 </script>

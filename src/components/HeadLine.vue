@@ -39,7 +39,7 @@ export default {
       headLine: "",
       isActive: false,
       comm: comm,
-      loading:false
+      loading: false
     };
   },
   created() {
@@ -50,8 +50,8 @@ export default {
       .then(
         response => {
           this.headLine = response.data.articles;
-          this.loading = true
-        },        
+          this.loading = true;
+        },
         error => {
           alert(error);
         }

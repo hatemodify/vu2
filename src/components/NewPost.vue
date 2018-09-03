@@ -6,7 +6,7 @@
           <input type="text" name="title" placeholder="TITLE" v-model="title">
         </div>
         <div>
-          <input type="file" name="file" ref="files" @change="onFileChange">
+          <input type="file" name="file" ref="img" @change="onFileChange">
         </div>
         <div>
           <textarea rows="15" cols="15" placeholder="DESCRIPTION" v-model="description"></textarea>
@@ -35,8 +35,8 @@ export default {
   methods: {
     upload(){
       let formData = new FormData();    
-      formData.append('file',this.$refs.files.files[0], this.$refs.files.files[0].name )      
-      console.log(formData.files)
+      formData.append('file',this.$refs.img.files[0], this.$refs.img.files[0].name )      
+      console.log(this.$refs.img.files[0])
       axios.post('http://localhost:9000/upload',
         formData , {
           headers:{
