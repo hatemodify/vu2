@@ -493,7 +493,14 @@
     animation-delay: .5s;
   }
 }
-
+.profile_wrap{
+  overflow: hidden;
+  width: 80px;
+  height: 80px;
+  img{
+    width: 100%;
+  }
+}
 
 @keyframes flip {
   0%{
