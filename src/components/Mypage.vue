@@ -3,12 +3,12 @@
     <h2 class="tit_user">my page</h2>
     <figure class="profile">
       <div class="profile_wrap">
-        <figure class="no_profile" v-if="profileImg == 'noImg'">          
+        <picture class="no_profile" v-if="profileImg == 'noImg'"> 
           <img src="~assets/images/no_profile.png" alt="">
-        </figure>  
-        <figure v-else>
+        </picture>  
+        <picture v-else>
           <img :src="profileImgPath">
-        </figure>
+        </picture>
       </div>      
       <figcaption></figcaption>
     </figure>
@@ -31,13 +31,15 @@ export default {
   data() {
     return {
       profileImg: "",
-      profileImgPath: ""
+      profileImgPath: ``
     };
   },
+  template: {},
   methods: {
     logOut() {
       this.$store.dispatch("LOGOUT").then(() => this.$router.push("/"));
-    }
+    },
+
   },
   mounted() {},
   created() {
@@ -45,13 +47,13 @@ export default {
     axios.get("http://localhost:9000/mypage").then(
       response => {
         const userData = response.data.data;
-        const profileImg = userData.profile;
-        this.profileImgPath = `require(../upload/profile/${profileImg})`;
+        this.profileImg = userData.profile;
+        this.profileImgPath = require(`../upload/profile/${this.profileImg}`);
       },
       error => {
         console.log(error);
       }
-    );
+    )
   },
   updated() {}
 };

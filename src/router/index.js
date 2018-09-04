@@ -1,5 +1,6 @@
 import Vue from 'vue'
 import Router from 'vue-router'
+import Index from '@/components/Index'
 import Search from '@/components/Search'
 import Posts from '@/components/Posts'
 import NewPost from '@/components/NewPost'
@@ -28,6 +29,11 @@ const returnId = () =>{
 export default new Router({
   mode: 'history',
   routes: [
+    {
+      path: '/',
+      name: 'Index',
+      component: Index
+    },
     {
       path: '/search/:query',
       name: 'Search',

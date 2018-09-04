@@ -4,14 +4,14 @@
 
 
 <script>
-import PostsService from "@/services/PostsService";
-import axios from "axios";
+import PostsService from '@/services/PostsService';
+import axios from 'axios';
 export default {
-  name: "MyScraps",
+  name: 'MyScraps',
   data() {
     return {
       userId: localStorage.accessToken,
-      scrapList: ""
+      scrapList: ''
     };
   },
   created() {
@@ -20,7 +20,7 @@ export default {
   },
   methods: {
     async getScrap() {
-      axios.get("http://localhost:9000/myscrap").then(
+      axios.get('http://localhost:9000/myscrap').then(
         response => {
           this.scraps = response.data;
           console.log(response);

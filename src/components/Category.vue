@@ -4,9 +4,9 @@
     <ul class="list_news">
       <li v-for="item in articles" :key="item.id">
         <a :href="item.url">
-          <figure class="wrap_thumb" v-if="item.urlToImage">
+          <picture class="wrap_thumb" v-if="item.urlToImage">
             <img :src="item.urlToImage" class="thumb_img" alt="">
-          </figure>
+          </picture>
             <div class="wrap_thumb no_img" v-else>
           </div>
           <div class="wrap_info">
@@ -22,13 +22,13 @@
 </template>
 
 <script>
-import axios from "axios";
-import VueLodash from "vue-lodash";
+import axios from 'axios';
+import VueLodash from 'vue-lodash';
 
 export default {
   data() {
     return {
-      articles: "",
+      articles: '',
       category: this.$route.params.category
     };
   },
@@ -54,17 +54,17 @@ export default {
   methods: {
     animation: function() {
       const tw = TweenMax;
-      const li = document.querySelector(".list_articles").childNodes;
+      const li = document.querySelector('.list_articles').childNodes;
 
       console.log(li);
-      tw.staggerTo(li, 0.3, { x: "0%", opacity: 1 }, 0.1);
+      tw.staggerTo(li, 0.3, { x: '0%', opacity: 1 }, 0.1);
     }
   },
   methods: {
     infiniteScroll() {
-      window.addEventListener("scroll", () => {
+      window.addEventListener('scroll', () => {
         const windowHeight = window.outerHeight;
-        const app = document.getElementById("app");
+        const app = document.getElementById('app');
         const appHeight = app.clientHeight;
         const scrollTop = window.scrollY;
         if (scrollTop > appHeight - windowHeight) {

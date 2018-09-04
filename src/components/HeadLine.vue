@@ -1,31 +1,31 @@
 <template>
-<div>
+<article class="headline_cont">
     <div class="preloader" v-if="loading == false">
       <span class="left"></span>
       <span class="right"></span>
       <span class="preloader_txt"></span>
     </div>
-<ul class="list_headline">
-  <li v-for="item in headLine" :key="item.title">
-    <button class="btn_scrap" :class="{'active': isActive}" @click="thisScrap(item)"></button>
-    <a :href="item.url" class="link_item">
-      <figure class="wrap_thumb" v-if="item.urlToImage">
-         <img :src="item.urlToImage" class="thumb_img" alt="">
-      </figure>
-      <div class="wrap_thumb no_img" v-else>
-      </div>
-    </a>
-    <div class="wrap_info">
-      <span class="txt_source">{{item.source.name}}</span>        
-      <strong class="tit_news">{{item.title}}</strong>
-      <div class="cf">
-        <span class="txt_date">{{comm.convertDate(item.publishedAt)}}</span>
-        <a :href="item.url" class="link_more" target="_blank">자세히 볼래요 </a>
-      </div>
-    </div>
-  </li>
-</ul>
-</div>
+    <ul class="list_headline">
+      <li v-for="item in headLine" :key="item.title">
+        <button class="btn_scrap" :class="{'active': isActive}" @click="thisScrap(item)"></button>
+        <a :href="item.url" class="link_item">
+          <picture class="wrap_thumb" v-if="item.urlToImage">
+            <img :src="item.urlToImage" class="thumb_img" alt="">
+          </picture>
+          <div class="wrap_thumb no_img" v-else>
+          </div>
+        </a>
+        <div class="wrap_info">
+          <span class="txt_source">{{item.source.name}}</span>        
+          <strong class="tit_news">{{item.title}}</strong>
+          <div class="cf">
+            <span class="txt_date">{{comm.convertDate(item.publishedAt)}}</span>
+            <a :href="item.url" class="link_more" target="_blank">자세히 볼래요 </a>
+          </div>
+        </div>
+      </li>
+    </ul>
+</article>
 </template>
 
 <script>
@@ -33,7 +33,6 @@ import axios from "axios";
 import comm from "../services/common.js";
 import PostsService from "../services/PostsService.js";
 export default {
-  name: "headline",
   data() {
     return {
       headLine: "",

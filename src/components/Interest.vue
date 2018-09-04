@@ -10,8 +10,8 @@
       <ul class="list_interest">
         <li v-for="item in key" :key="item.id">
           <a :href="item.url">
-            <figure class="wrap_thumb" v-if="item.urlToImage" v-bind:style="{ backgroundImage: 'url(' + item.urlToImage + ')' }">
-            </figure>
+            <picture class="wrap_thumb" v-if="item.urlToImage" v-bind:style="{ backgroundImage: 'url(' + item.urlToImage + ')' }">
+            </picture>
             <div class="wrap_thumb no_img" v-else>
             </div>
             <div class="wrap_info">
@@ -30,17 +30,17 @@
 </template>
 
 <script>
-import axios from "axios";
-import comm from "../services/common.js";
+import axios from 'axios';
+import comm from '../services/common.js';
 export default {
   template: {},
   data() {
     return {
       userId: localStorage.accessToken,
-      interest: "",
+      interest: '',
       listInterest: [],
       comm: comm,
-      loading:false
+      loading: false
     };
   },
   created() {
@@ -53,7 +53,7 @@ export default {
         .then(
           () => {
             this.getInterest(this.interest);
-            this.loading = true
+            this.loading = true;
           },
           error => {
             console.log(error);

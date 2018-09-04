@@ -15,17 +15,17 @@
   </div>
 </template>
 <script>
-import UserService from "@/services/UserService";
-import axios from "axios";
+import UserService from '@/services/UserService';
+import axios from 'axios';
 export default {
   data() {
     return {
-      id: "",
-      password: "",
-      msg: "",
-      url: "/signup",
+      id: '',
+      password: '',
+      msg: '',
+      url: '/signup',
       chkLogin: localStorage.accessToken,
-      test: "",
+      test: '',
       root: process.env.ROOT
     };
   },
@@ -41,8 +41,8 @@ export default {
       })
         .then(
           response => {
-            alert("success login");
-            this.$store.dispatch("LOGIN", id);
+            alert('success login');
+            this.$store.dispatch('LOGIN', id);
           },
           error => {
             alert(error.response);
@@ -54,12 +54,12 @@ export default {
           alert(error.response);
           console.log(error.response);
         });
-      this.$router.push({ name: "Headline" });
+      this.$router.push({ name: 'Headline' });
     },
     logOut() {
       this.$store
-        .dispatch("LOGOUT")
-        .then(() => this.$router.push({ name: "Headline" }));
+        .dispatch('LOGOUT')
+        .then(() => this.$router.push({ name: 'Headline' }));
     }
   }
 };

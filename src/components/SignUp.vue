@@ -41,62 +41,57 @@
 </template>
 
 <script>
-import UserService from "@/services/UserService";
-import axios from "axios";
+import UserService from '@/services/UserService';
+import axios from 'axios';
 export default {
   data: () => {
     return {
-      id: "",
-      password: "",
+      id: '',
+      password: '',
       interest: [],
-      image: "",
-      profileImg: "",
+      image: '',
+      profileImg: '',
       formData: new FormData()
     };
   },
   methods: {
     async signUp() {
       if (!this.id) {
-        alert("id 를 입력해주세요");
+        alert('id 를 입력해주세요');
         return;
       } else if (!this.password) {
-        alert("password 를 입력해주세요");
+        alert('password 를 입력해주세요');
         return;
       } else {
-        this.formData.append("id", this.id);
-        this.formData.append("password", this.password);
-        this.formData.append("interest", this.interest);
-        
+        this.formData.append('id', this.id);
+        this.formData.append('password', this.password);
+        this.formData.append('interest', this.interest);
+
         const config = {
-          headers: { "Content-Type": "multipart/form-data" }
+          headers: { 'Content-Type': 'multipart/form-data' }
         };
         axios
-          .post("http://localhost:9000/user/signup", this.formData, config)
+          .post('http://localhost:9000/user/signup', this.formData, config)
           .then(function() {
-            console.log("success");
+            console.log('success');
           })
           .catch(function() {
-            console.log("fail");
+            console.log('fail');
           });
-       
-         this.$router.push({ name: "Login" });
+
+        this.$router.push({ name: 'Login' });
       }
-      console.log(this.interest)
+      console.log(this.interest);
     },
     onFileChange(e) {
       var files = e.target.files || e.dataTransfer.files;
       if (!files.length) return;
       this.createImage(files[0]);
       this.formData.append(
-        "file",
+        'file',
         this.$refs.reg_profile.files[0],
         this.$refs.reg_profile.files[0].name
       );
-      // this.formData.append(
-      //   "reg_profile",
-      //   this.$refs.reg_profile.files[0],
-      //   this.$refs.reg_profile.files[0].name
-      // );
     },
     createImage(file) {
       const image = new Image();
@@ -110,7 +105,7 @@ export default {
       reader.readAsDataURL(file);
     },
     removeImage: function(e) {
-      this.image = "";
+      this.image = '';
     },
     handleFilesUpload() {
       let uploadedFiles = this.$refs.files.files;
