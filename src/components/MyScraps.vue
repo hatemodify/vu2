@@ -20,7 +20,7 @@ export default {
   },
   methods: {
     async getScrap() {
-      axios.get('http://localhost:9000/myscrap').then(
+      axios.get(`${process.env.ROOT_API}/myscrap`).then(
         response => {
           this.scraps = response.data;
           console.log(response);

@@ -43,7 +43,7 @@ export default {
   mounted() {},
   created() {
     const authorization = localStorage.accessToken;
-    axios.get('http://localhost:9000/mypage').then(
+    axios.get('https://fead.herokuapp.com:9000/mypage').then(
       response => {
         const userData = response.data.data;
         console.log(userData)

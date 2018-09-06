@@ -87,7 +87,7 @@ export default {
   },
   created() {
     if(this.chkLogin !== 'null'){
-    axios.get('http://localhost:9000/mypage').then(
+    axios.get(`${process.env.ROOT_API}/mypage`).then(
       response => {
         const userData = response.data.data;
         console.log(userData);

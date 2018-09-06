@@ -71,7 +71,7 @@ export default {
           headers: { 'Content-Type': 'multipart/form-data' }
         };
         axios
-          .post('http://localhost:9000/user/signup', this.formData, config)
+          .post(`${process.env.ROOT_API}/user/signup`, this.formData, config)
           .then(function() {
             console.log('success');
           })

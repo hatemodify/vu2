@@ -37,7 +37,7 @@ export default {
       let formData = new FormData();    
       formData.append('file',this.$refs.img.files[0], this.$refs.img.files[0].name )      
       console.log(this.$refs.img.files[0])
-      axios.post('http://localhost:9000/upload',
+      axios.post(`${process.env.ROOT_API}/upload`,
         formData , {
           headers:{
             'Content-Type': 'multipart/form-data'
