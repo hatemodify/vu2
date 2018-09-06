@@ -1,5 +1,5 @@
 'use strict'
 module.exports = {
   NODE_ENV: '"production"',
-  ROOT_API: '"https://dsddfg.herokuapp.com/"',
+  ROOT_API: '"https://fead-server.herokuapp.com"',
 }
