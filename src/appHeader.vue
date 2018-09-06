@@ -55,7 +55,7 @@ export default {
       chkLogin: localStorage.accessToken,
       profileImg: '',
       profileImgPath: '',
-      user:''
+      user: ''
     };
   },
   watch: {
@@ -63,14 +63,21 @@ export default {
       this.searchQuery = '검색어를 입력하세요';
     }
   },
-  watch:{
-
-  },
   methods: {
     activeMenu(e) {
       const appHeader = document.getElementById('appHeader');
-      this.isActive = !this.isActive
-      this.isActive? appHeader.classList.add('active') : appHeader.classList.remove('active');
+      const nav = document.querySelector('.side_menu');
+      this.isActive = !this.isActive;
+      this.isActive
+        ? appHeader.classList.add('active')
+        : appHeader.classList.remove('active');  
+            
+      nav.addEventListener('click', function(e) {
+        if (e.target == this) {
+          appHeader.classList.remove('active');
+          this.isActive = !this.isActive;
+        }
+      });
     },
     searchEvt() {
       !this.searchQuery
@@ -79,28 +86,21 @@ export default {
     }
   },
   created() {
-    if(this.chkLogin !== 'null'){
-    axios.get(`${process.env.ROOT_API}/mypage`).then(
-      response => {
-        const userData = response.data.data;
-        console.log(userData);
-        this.user = userData.id;
-        this.profileImg = userData.profile;
-        this.profileImgPath = require(`./upload/profile/${this.profileImg}`);
-      },
-      error => {
-        console.log(error);
-      }
-    );
+    if (this.chkLogin !== 'null') {
+      axios.get(`${process.env.ROOT_API}/mypage`).then(
+        response => {
+          const userData = response.data.data;
+          console.log(userData);
+          this.user = userData.id;
+          this.profileImg = userData.profile;
+          this.profileImgPath = require(`./upload/profile/${this.profileImg}`);
+        },
+        error => {
+          console.log(error);
+        }
+      );
     }
-  },mounted(){
-    const nav = document.querySelector('.side_menu');
-    nav.addEventListener('click', function(e){
-      if(e.target == this) {
-        appHeader.classList.remove('active')
-        this.isActive = !this.isActive
-      } 
-    })        
-  }
+  },
+  mounted() {}
 };
 </script>

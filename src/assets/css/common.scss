@@ -31,6 +31,9 @@
     .side_menu {
       transform: translateX(0);
     }
+    .btn_menu {
+      transform: rotate(90deg)
+    }
   }
   .app_logo {
     float: left;
@@ -52,9 +55,7 @@
       height: 23px;
       background-position: -90px 0;
     }
-    &.active {
-      transform: rotate(90deg)
-    }
+ 
   }
   .side_menu {
     position: fixed;
