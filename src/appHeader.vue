@@ -19,13 +19,13 @@
       <div class="inner">
         <div class="wrap_profile" v-if="chkLogin !== 'null'">
           <picture class="wrap_thumb">
-            <img :src="profileImgPath" alt="">
+            <img :src="profileImgPath" class="thumb_img" alt="">
           </picture>
           <strong class="user_name">{{user}}</strong>
         </div>
         <div class="wrap_profile" v-else>
           <picture class="wrap_thumb no_profile">
-            <img src="./assets/images/thumb_user.png" class="thumb_img">
+            <img src="./assets/images/thumb_user.png" class="thumb_img" alt="">
           </picture>
           <strong class="txt_login">로그인 하시면 더 많은 서비스를 이용하실 수 있습니다.</strong>
         </div>
@@ -63,21 +63,14 @@ export default {
       this.searchQuery = '검색어를 입력하세요';
     }
   },
+  watch:{
+
+  },
   methods: {
-    activeMenu() {
+    activeMenu(e) {
       const appHeader = document.getElementById('appHeader');
-      const nav = document.querySelector('.side_menu');
-      this.isActive = !this.isActive;
-      this.isActive
-        ? appHeader.classList.add('active')
-        : appHeader.classList.remove('active');
-      
-      nav.addEventListener('click', function(e){
-        if(e.target == this) {
-          appHeader.classList.remove('active')
-          this.isActive = !this.isActive
-        } 
-      })        
+      this.isActive = !this.isActive
+      this.isActive? appHeader.classList.add('active') : appHeader.classList.remove('active');
     },
     searchEvt() {
       !this.searchQuery
@@ -101,7 +94,13 @@ export default {
     );
     }
   },mounted(){
-
+    const nav = document.querySelector('.side_menu');
+    nav.addEventListener('click', function(e){
+      if(e.target == this) {
+        appHeader.classList.remove('active')
+        this.isActive = !this.isActive
+      } 
+    })        
   }
 };
 </script>

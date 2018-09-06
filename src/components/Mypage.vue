@@ -4,7 +4,7 @@
     <figure class="profile">
       <div class="profile_wrap">
         <picture class="no_profile" v-if="profileImg == 'noImg'"> 
-          <img src="~assets/images/no_profile.png" alt="">
+          <img src="~assets/images/no_profile.png"  class="thumb_img" alt="">
         </picture>  
         <picture v-else>
           <img :src="profileImgPath">
