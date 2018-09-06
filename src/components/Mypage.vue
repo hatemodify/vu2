@@ -26,34 +26,34 @@
 
 
 <script>
-import axios from "axios";
+import axios from 'axios';
 export default {
   data() {
     return {
-      profileImg: "",
-      profileImgPath: ``
+      profileImg: '',
+      profileImgPath: ''
     };
   },
   template: {},
   methods: {
     logOut() {
-      this.$store.dispatch("LOGOUT").then(() => this.$router.push("/"));
-    },
-
+      this.$store.dispatch('LOGOUT').then(() => this.$router.push('/'));
+    }
   },
   mounted() {},
   created() {
     const authorization = localStorage.accessToken;
-    axios.get("http://localhost:9000/mypage").then(
+    axios.get('http://localhost:9000/mypage').then(
       response => {
         const userData = response.data.data;
+        console.log(userData)
         this.profileImg = userData.profile;
         this.profileImgPath = require(`../upload/profile/${this.profileImg}`);
       },
       error => {
         console.log(error);
       }
-    )
+    );
   },
   updated() {}
 };

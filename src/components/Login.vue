@@ -47,14 +47,13 @@ export default {
           error => {
             alert(error.response);
             console.log(error.response);
-            // this.$router.push({ name: "Login" });
           }
         )
         .catch(error => {
           alert(error.response);
           console.log(error.response);
         });
-      this.$router.push({ name: 'Headline' });
+      this.$router.push({ name: 'Index' });
     },
     logOut() {
       this.$store

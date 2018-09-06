@@ -65,12 +65,51 @@
     transition: cubic-bezier(0.23, 1, 0.320, 1) .8s;
     z-index: 11;
     transform: translateX(-100%);
-    .side_nav {
+    .wrap_profile{
+      overflow: hidden;
+      margin-bottom: 20px;
+      padding-bottom: 25px;      
+      border-bottom: 1px solid #ebebeb;
+      .wrap_thumb{
+        overflow: hidden;
+        float: left;
+        width: 80px;     
+        height: 80px; 
+        margin-right: 20px;
+        border-radius: 50%;
+        border:1px solid rgba(0,0,0,.2);
+        &.no_profile{
+          .thumb_img{
+            display: block;
+            width: 60px;
+            margin:15px auto 0;
+          }
+        }
+      }
+      .user_name{
+        font-size: 20px;
+        line-height: 80px;
+      }
+    }
+    .list_menu{
+      padding-bottom: 25px;
+      border-bottom: 1px solid #ebebeb;
+      li{
+        line-height: 50px;
+        padding-left: 20px;
+      }
+    }
+    .btn_logout{
+      float: right;
+      margin-top: 30px;
+    }
+    .inner {
       position: absolute;
       top: 0;
       left: 0;
       width: 80%;
       height: 100%;
+      padding:50px 20px;
       background: #fff;
     }
   }
