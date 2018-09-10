@@ -1,11 +1,8 @@
 export default {
-  noImg () {
-    const list = document.querySelectorAll('.wrap_thumb img')
-    list.forEach(element => {
-      if (!_.startsWith(element.getAttribute('src'), 'http')) {
-        element.parentElement.classList.add('no_img')
-      }
-    })
+  noImg (elem) {
+    elem.forEach(element => {
+      console.log(element)
+    });
   },
   convertDate (date) {
     return date.replace(/-|T/g, ".").slice(0, 16)

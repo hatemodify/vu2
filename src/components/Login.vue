@@ -26,7 +26,8 @@ export default {
       url: '/signup',
       chkLogin: localStorage.accessToken,
       test: '',
-      root: process.env.ROOT
+      root: process.env.ROOT,
+           isActive: false,
     };
   },
   mounted() {

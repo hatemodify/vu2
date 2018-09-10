@@ -28,6 +28,7 @@
             <img src="./assets/images/thumb_user.png" class="thumb_img" alt="">
           </picture>
           <strong class="txt_login">로그인 하시면 더 많은 서비스를 이용하실 수 있습니다.</strong>
+          <router-link to="/login" @click="activeMenu">로그인</router-link>
         </div>
         <nav class="side_nav">
           <ul class="list_menu">
