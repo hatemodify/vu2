@@ -4,6 +4,9 @@ export default {
   fetchPosts () {
     return Api().get('posts')
   },
+  ViewPost (){
+    return Api().get('posts/:title')
+  },
   addPost (params) {
     return Api().post('posts', params)
   },

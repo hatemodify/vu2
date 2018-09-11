@@ -7,7 +7,6 @@ const _ = require("lodash");
 const User = require("../models/user");
 const DB_SETTING = require("./dbsetting");
 const multer = require("multer");
-const Q = require('Q');
 const NewsAPI = require("newsapi");
 const newsapi = new NewsAPI("602cd3b6051a451d8e99935b8e7cad01");
 

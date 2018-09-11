@@ -6,10 +6,14 @@ const Post = require('../models/post');
 router.post('/', (req, res) => {
   const db = req.db;
   const title = req.body.title;
-  const description = req.body.description;
+  const tag = req.body.tag;
+  const author = req.body.author;
+  const content = req.body.content;
   const new_post = new Post({
-    title: title,
-    description: description
+    title,
+    author,
+    tag,
+    content
   });
 
   new_post.save(error => {
@@ -21,38 +25,88 @@ router.post('/', (req, res) => {
   });
 });
 
-router.get('/posts:id', (req, res) => {
-  Post.find({}, 'title description', (err, posts) => {
+router.get('/:title', (req, res) => { 
+  var db = req.db;
+  console.log(req.params.title)
+  // Post.findOne({title: req.params.title}, function (error, post) {
+  //   if (error) { console.error(error); }else{
+  //     console.log(post);
+  //   }
+  //   res.send({
+  //     post
+  //   })
+  // })
+  Post.find({
+    title:req.params.title
+  }, 'title content', (err, posts) => {
     if (err) {
       console.log(err);
     }
     res.send({
       posts: posts
     });
-  });
-});
-
-router.put('/posts/:id', (req, res) => {
-  const db = req.db;
-  Post.findById(req.params.id, 'title description', function (error, post) {
-    if (error) {
-      console.error(error);
-    }
-
-    post.title = req.body.title
-    post.description = req.body.description
-    post.save(function (error) {
-      if (error) {
-        console.log(error)
-      }
-      res.send({
-        success: true
-      });
-    });
+  }).sort({
+    _id: -1
   });
 });
 
 
+// router.get('/:title', (req, res) => {
+//   Post.findOne({ title: req.params.title})
+//   .then(console.log(title))
+
+
+  
+  // router.get("/:title", function (req, res) {
+  //   Post.findOne({ title: req.params.title }) // 3
+  //     .populate("author")               // 3
+  //     .exec(function (err, post) {        // 3
+  //       if (err) return res.json(err);
+  //       res.render("posts/show", { 
+  //         post: post 
+  //       });
+  //     });
+  // });
+
+
+  // Post.findOne(
+  //   {
+  //     id: req.body.id,
+  //     password: cipherPw
+  //   },
+  //   (err, id, password, user) => {
+  //     if (err)
+  //       return res.status(500).json({
+  //         error: err
+  //       });
+  //     if (!id)
+  //       return res.status(404).json({
+  //         error: `${id} : ${password} user not found`
+  //       });
+  //     res.json(user);
+  //   }
+  // );
+// });
+
+// router.put('/posts/:id', (req, res) => {
+//   const db = req.db;
+//   Post.findById(req.params.id, 'title description', function(error, post) {
+//     if (error) {
+//       console.error(error);
+//     }
+
+//     post.title = req.body.title;
+//     post.description = req.body.description;
+//     post.save(function(error) {
+//       if (error) {
+//         console.log(error);
+//       }
+//       res.send({
+//         success: true
+//       });
+//     });
+//   });
+// });
 
 /* router.post('/signup', (req, res) => {
   const db = req.db;
@@ -71,7 +125,6 @@ router.put('/posts/:id', (req, res) => {
     });
   });
 }); */
-
 
 router.get('/', (req, res) => {
   Post.find({}, 'title description', (err, posts) => {

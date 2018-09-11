@@ -32,10 +32,11 @@
         </div>
         <nav class="side_nav">
           <ul class="list_menu">
-            <li>마이페이지</li>
-            <li>마이페이지</li>
-            <li>나의 포스팅</li>
-            <li>포스팅</li>
+            <li v-if="chkLogin !== 'null'">
+              <router-link to="/mypage">마이페이지</router-link>
+            </li>
+            <li><router-link to="/myscrap">나의 스크랩</router-link></li>
+            <li>관심사 모아보기</li>
             <li>마이페이지</li>
           </ul>
         </nav>
@@ -71,8 +72,8 @@ export default {
       this.isActive = !this.isActive;
       this.isActive
         ? appHeader.classList.add('active')
-        : appHeader.classList.remove('active');  
-            
+        : appHeader.classList.remove('active');
+
       nav.addEventListener('click', function(e) {
         if (e.target == this) {
           appHeader.classList.remove('active');

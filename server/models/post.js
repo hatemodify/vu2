@@ -2,9 +2,10 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const PostSchema = new Schema({
-  userid:String,
+  author:String,
   title:String,
-  description:String,
+  tag:String,
+  content:String,
   files:String
 });
 

@@ -3,97 +3,111 @@
     <h1>Add Post</h1>
       <div class="form">
         <div>
-          <input type="text" name="title" placeholder="TITLE" v-model="title">
+          <input type="text" name="author" readonly v-model="author">
+          <input type="text" name="title" placeholder="제목을 입력하세요." v-model="title">
         </div>
         <div>
           <input type="file" name="file" ref="img" @change="onFileChange">
         </div>
         <div>
-          <textarea rows="15" cols="15" placeholder="DESCRIPTION" v-model="description"></textarea>
+          <vue-editor v-model="content"></vue-editor>
+          <textarea name="tag" placeholder="tag" v-model="tag"></textarea>
         </div>
         <img :src="image">
         <div>
           <button class="" @click="submitFile()"></button>
-          <button class="app_post_btn" @click="upload">Add</button>
+          <button class="app_post_btn" @click="addPost">Add</button>
         </div>
       </div>
   </div>
 </template>
 
 <script>
-import PostsService from '@/services/PostsService'
-import axios from 'axios'
+import PostsService from '@/services/PostsService';
+import { VueEditor } from 'vue2-editor';
+import axios from 'axios';
 export default {
   name: 'NewPost',
-  data () {
+  components: {
+    VueEditor
+  },
+  data() {
     return {
       title: '',
-      description: '',
-      image:'',
-    }
+      tag: '',
+      author: localStorage.accessToken,
+      content:'',
+      image: ''
+    };
   },
   methods: {
-    upload(){
-      let formData = new FormData();    
-      formData.append('file',this.$refs.img.files[0], this.$refs.img.files[0].name )      
-      console.log(this.$refs.img.files[0])
-      axios.post(`${process.env.ROOT_API}/upload`,
-        formData , {
-          headers:{
+    upload() {
+      let formData = new FormData();
+      // formData.append(
+      //   'file',
+      //   this.$refs.img.files[0],
+      //   this.$refs.img.files[0].name
+      // );
+      // console.log(this.$refs.img.files[0]);
+      axios
+        .post(`${process.env.ROOT_API}/upload`, formData, {
+          headers: {
             'Content-Type': 'multipart/form-data'
           }
-      }).then(function(){
-        console.log('success');
-      }).catch(function(){
-        console.log('fail');
-      });
+        })
+        .then(function() {
+          console.log('success');
+        })
+        .catch(function() {
+          console.log('fail');
+        });
     },
-    async addPost () {
+    async addPost() {
       await PostsService.addPost({
         title: this.title,
-        description: this.description,
-        files:this.image,
-      })
-          console.log(this.image)
+        author: this.author,
+        content:this.content,
+        tag:this.tag,
+        // files: this.image
+      });
+      console.log(this.image);
       // this.$router.push({ name: 'Posts' })
     },
-     onFileChange(e) {
-        var files = e.target.files || e.dataTransfer.files;
-        if (!files.length)
-          return;
-        this.createImage(files[0]);
-      },
-      createImage(file) {
-        var image = new Image();
-        var reader = new FileReader();
-        var vm = this;
+    onFileChange(e) {
+      var files = e.target.files || e.dataTransfer.files;
+      if (!files.length) return;
+      this.createImage(files[0]);
+    },
+    createImage(file) {
+      var image = new Image();
+      var reader = new FileReader();
+      var vm = this;
 
-        reader.onload = (e) => {
-          vm.image = e.target.result;
-          console.log(vm.image)
-        };
-        reader.readAsDataURL(file);   
-        
-      },
-      removeImage: function (e) {
-        this.image = '';
-      },
-      handleFilesUpload(){
-        let uploadedFiles = this.$refs.files.files;
-        /*
+      reader.onload = e => {
+        vm.image = e.target.result;
+        console.log(vm.image);
+      };
+      reader.readAsDataURL(file);
+    },
+    removeImage: function(e) {
+      this.image = '';
+    },
+    handleFilesUpload() {
+      let uploadedFiles = this.$refs.files.files;
+      /*
           Adds the uploaded file to the files array
         */
-       console.log(uploadedFiles)
-      },
-    },
-    updated(){
-
+      console.log(uploadedFiles);
     }
+  },
+  updated() {
+    console.log(this.author);
   }
-
+};
 </script>
 <style type="text/css">
-.form input, .form textarea {
+.form input,
+.form textarea {
   width: 500px;
   padding: 10px;
   border: 1px solid #e0dede;

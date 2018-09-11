@@ -5,7 +5,7 @@ import Search from '@/components/Search'
 import Posts from '@/components/Posts'
 import NewPost from '@/components/NewPost'
 import NewsList from '@/components/NewsList'
-import EditPost from '@/components/EditPost'
+import ViewPost from '@/components/ViewPost'
 import Login from '@/components/Login'
 import Mypage from '@/components/Mypage'
 import SignUp from '@/components/SignUp'
@@ -60,9 +60,9 @@ export default new Router({
       component: NewsList
     },
     {
-      path: '/posts/:id',
-      name: 'EditPost',
-      component: EditPost
+      path: '/posts/view',
+      name: 'ViewPost',
+      component: ViewPost
     },
     {
       path: '/login',
