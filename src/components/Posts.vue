@@ -1,44 +1,14 @@
 <template>
-<!--   <div class="posts">
-    <h1>Posts</h1>
-    <div v-if="posts.length > 0" class="table-wrap">
-      <div>
-        {{posts}}
-        <router-link v-bind:to="{ name: 'NewPost' }" class="">Add Post</router-link>
-      </div>
-      <table>
-        <tr>
-          <td>Title</td>
-          <td width="550">Description</td>
-          <td width="100" align="center">Action</td>
-        </tr>
-        <tr v-for="post in posts" :key="post.id">
-          <td>{{ post.title }}</td>
-          <td>{{ post.description }}</td>
-          <td align="center">
-            <router-link v-bind:to="{ name: 'EditPost', params: { id: post._id } }">Edit</router-link> |
-            <a href="#">Delete</a>
-          </td>
-        </tr>
-      </table>
-    </div>
-    <div v-else>
-      There are no posts.. Lets add one now <br /><br />
-      <router-link v-bind:to="{ name: 'NewPost' }" class="add_post_link">Add Post</router-link>
-    </div>
-  </div> -->
-</template>
-
-
-<template>
   <div class="post_cont">
     <h2 class="tit_page">POST</h2>
     <ul class="list_post" v-if="posts.length > 0">
       <li v-for="post in posts" :key="post.id">
-        <picture class="wrap_thumb"></picture>
+        <picture class="wrap_thumb">
+          {{post.content}}
+        </picture>
         <div class="wrap_info">
           <strong class="tit_post">
-            <router-link v-bind:to="{ name: 'ViewPost', params: { title: post.title } }">
+            <router-link v-bind:to="{ name: 'ViewPost', params: { title: encodeURIComponent(post.title) } }">
               {{post.title}}
               </router-link>
           </strong>
@@ -70,6 +40,12 @@ export default {
     async getPosts() {
       const response = await PostsService.fetchPosts();
       this.posts = response.data.posts;
+      this.posts.forEach(elem=>{
+        console.log(elem.content.split('<img src="'));
+      })
+    },
+    getImg(){
+
     }
   }
 };

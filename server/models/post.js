@@ -6,7 +6,16 @@ const PostSchema = new Schema({
   title:String,
   tag:String,
   content:String,
-  files:String
+  files:String,
+  createdDate: {
+    type: Date,
+    default: Date.now
+  },
+  updatedDate: {
+    type: Date,
+    default: Date.now
+  },
+  like: Number,
 });
 
 

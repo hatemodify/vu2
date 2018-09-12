@@ -9,7 +9,7 @@
       <ul class="list_headline">
         <li v-for="item in headLine" :key="item.title">
           <button class="btn_scrap" :class="{'active': isActive}" @click="thisScrap(item)"></button>
-          <a :href="item.url" class="link_item">
+          <a :href="item.url" class="link_item" target="_blank">
             <picture class="wrap_thumb" v-if="item.urlToImage">
               <img :src="item.urlToImage" class="thumb_img" alt="">
             </picture>            
@@ -34,7 +34,7 @@
       </h3>
       <ul class="list_cate">
         <li v-for="(item ,idx) in newsList[cate]" :key="idx">
-          <a :href="item.url" class="link_item">
+          <a :href="item.url" class="link_item" target="_blank">
            <picture class="wrap_thumb" v-if="item.urlToImage">
               <img :src="item.urlToImage" class="thumb_img" alt="">
             </picture>

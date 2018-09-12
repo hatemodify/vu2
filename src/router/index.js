@@ -60,7 +60,7 @@ export default new Router({
       component: NewsList
     },
     {
-      path: '/posts/view',
+      path: '/posts/view/:title',
       name: 'ViewPost',
       component: ViewPost
     },

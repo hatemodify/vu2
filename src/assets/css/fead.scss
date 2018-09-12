@@ -673,7 +673,32 @@
 }
 .post_cont{
   padding-top: 80px;
+  .tit_post{
+    font-size: 20px;
+    margin-bottom: 45px;
+    color: #fff;
+  }
+  .txt_tag{
+    margin-right:10px;
+  }
 }
+.quillWrapper{
+  background: #fff;
+  .ql-container{
+    padding:5px 10px;
+  }
+}
+
+.ql-editor{
+  padding:10px 10px 10px 0 !important;
+  .ql-syntax{
+    display: block;
+    padding:10px;
+    color: #fff;
+    background: #222;
+  }
+}
+
 
 
 @keyframes flip {
@@ -718,3 +743,6 @@
 }
 
 
+.wrap_signup{
+  overflow: hidden;
+}
