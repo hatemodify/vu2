@@ -1,35 +1,34 @@
-const express = require("express");
-const bodyParesr = require("body-parser");
-const cors = require("cors");
-const morgan = require("morgan");
-const mongoose = require("mongoose");
-const _ = require("lodash");
-const User = require("../models/user");
-const DB_SETTING = require("./dbsetting");
-const multer = require("multer");
-const NewsAPI = require("newsapi");
-const newsapi = new NewsAPI("602cd3b6051a451d8e99935b8e7cad01");
-
-
+const express = require('express');
+const bodyParesr = require('body-parser');
+const cors = require('cors');
+const morgan = require('morgan');
+const mongoose = require('mongoose');
+const _ = require('lodash');
+const User = require('../models/user');
+const DB_SETTING = require('./dbsetting');
+const multer = require('multer');
+const NewsAPI = require('newsapi');
+const newsapi = new NewsAPI('602cd3b6051a451d8e99935b8e7cad01');
 
 mongoose.connect(DB_SETTING);
 const db = mongoose.connection;
 
-db.on("error", console.error.bind(console, "connection error"));
+db.on('error', console.error.bind(console, 'connection error'));
 
-db.once("open", callbak => {
-  console.log("db connection success");
+db.once('open', callbak => {
+  console.log('db connection success');
 });
 
 const app = express();
 
-app.use(morgan("combined"));
-app.use(bodyParesr.json());
-app.use(cors());
-app.use("/user", require("../routes/user"));
-app.use("/posts", require("../routes/post"));
+app.use(morgan('combined'));
+app.use(bodyParesr.json({ limit: '50mb' }));
 
-app.get("/news", (req, res) => {
+app.use(cors());
+app.use('/user', require('../routes/user'));
+app.use('/posts', require('../routes/post'));
+
+app.get('/news', (req, res) => {
   console.log(req.headers);
   Promise.all([
     getNewsList(`business`),
@@ -51,10 +50,10 @@ app.get("/news", (req, res) => {
         }
       })
     )
-    .catch(err => res.send("Ops, something has gone wrong"));
+    .catch(err => res.send('Ops, something has gone wrong'));
 });
 
-app.get("/search/:query", (req, res) => {
+app.get('/search/:query', (req, res) => {
   const query = req.params.query;
   console.log(query);
   getNewsSearch(query)
@@ -63,10 +62,10 @@ app.get("/search/:query", (req, res) => {
         result
       })
     )
-    .catch(err => res.send("Ops, something has gone wrong"));
+    .catch(err => res.send('Ops, something has gone wrong'));
 });
 
-app.put("/scrap", (req, res) => {
+app.put('/scrap', (req, res) => {
   const db = req.db;
   const scrap = req.body.scrap;
   const userId = req.body.userId;
@@ -80,12 +79,12 @@ app.put("/scrap", (req, res) => {
       }
     },
     success => {
-      console.log("success");
+      console.log('success');
     }
   );
 });
 
-app.get("/myscrap", (req, res) => {
+app.get('/myscrap', (req, res) => {
   const userId = req.headers.authorization;
   User.find(
     {
@@ -104,7 +103,7 @@ app.get("/myscrap", (req, res) => {
   });
 });
 
-app.get("/interest", (req, res) => {
+app.get('/interest', (req, res) => {
   if (req.headers.authorization) {
     const userId = req.headers.authorization;
     User.find(
@@ -122,14 +121,12 @@ app.get("/interest", (req, res) => {
     );
   } else {
     res.send({
-      msg: "login plz"
+      msg: 'login plz'
     });
   }
 });
 
-
-
-app.get('/mypage', (req, res)=>{
+app.get('/mypage', (req, res) => {
   const userId = req.headers.authorization;
   console.log(userId);
   User.find(
@@ -149,7 +146,7 @@ app.get('/mypage', (req, res)=>{
   });
 });
 
-app.get("/member", (req, res) => {
+app.get('/member', (req, res) => {
   User.find({}, (err, member) => {
     if (err) {
       console.log(err);
@@ -165,8 +162,8 @@ function getNewsList(cate) {
     newsapi.v2
       .topHeadlines({
         category: cate,
-        language: "ko",
-        country: "kr",
+        language: 'ko',
+        country: 'kr',
         pageSize: 1
       })
       .then(res => res.articles[0])
@@ -181,7 +178,7 @@ function getNewsSearch(query) {
       .everything({
         q: query,
         pageSize: 20,
-        language: "ko"
+        language: 'ko'
       })
       .then(res => res.articles)
       .then(data => resolve(data))
@@ -189,22 +186,19 @@ function getNewsSearch(query) {
   });
 }
 
-
 const storage = multer.diskStorage({
-  destination:  (req, file, cb) =>{
-    cb(null, '../src/upload/') // cb 콜백함수를 통해 전송된 파일 저장 디렉토리 설정
+  destination: (req, file, cb) => {
+    cb(null, '../src/upload/'); // cb 콜백함수를 통해 전송된 파일 저장 디렉토리 설정
   },
-  filename:  (req, file, cb) =>{
-    cb(null, file.originalname) // cb 콜백함수를 통해 전송된 파일 이름 설정
+  filename: (req, file, cb) => {
+    cb(null, file.originalname); // cb 콜백함수를 통해 전송된 파일 이름 설정
   }
-})
-const upload = multer({ storage: storage })
-
-app.post('/upload', upload.single('file'), (req,res)=>{
-  res.send('Uploaded:' + req.file);
-  console.log(req.file);  
 });
+const upload = multer({ storage: storage });
 
-
+app.post('/upload', upload.single('file'), (req, res) => {
+  res.send('Uploaded:' + req.file);
+  console.log(req.file);
+});
 
 app.listen(process.env.PORT || 9000);

@@ -1,20 +1,16 @@
 <template>
-  <div class="posts">
-    <h1>Add Post</h1>
-          <input type="text" name="author" readonly v-model="author">
-          <input type="text" name="title" placeholder="제목을 입력하세요." v-model="title">
-        <div>
-          <input type="file" name="file" ref="img" @change="onFileChange">
-        </div>
-        <div>
-          <vue-editor v-model="content"></vue-editor>
-          <textarea name="tag" placeholder="tag" v-model="tag"></textarea>
-        </div>
-        <img :src="image">
-     
-          <button class="" @click="submitFile()"></button>
-          <button class="app_post_btn" @click="addPost">Add</button>
-
+  <div class="write_post">
+    <input type="hidden" name="author" readonly v-model="author" class="inp_author">
+    <input type="text" name="title" placeholder="제목을 입력하세요." class="inp_author" v-model="title">
+          <!-- <input type="file" name="file" ref="img" @change="onFileChange"> -->
+    <div class="wrap_editor">
+      <vue-editor v-model="content"></vue-editor>
+    </div>
+    <input type="text" class="inp_tag" name="tag" placeholder="태그를 입력하세요" v-model="tag">
+<sub class="txt_tag">다수의 태그를 입력시 ','로 구분지어 주세요.</sub>
+    <!-- <img :src="image"> -->
+      <!-- <button class="" @click="submitFile()"></button> -->
+      <button class="btn_post" @click="addPost">작성</button>
   </div>
 </template>
 
@@ -32,11 +28,37 @@ export default {
       title: '',
       tag: '',
       author: localStorage.accessToken,
-      content:'',
+      content: '',
       image: ''
     };
   },
+  created() {
+    if (localStorage.accessToken == 'null') {
+      alert('로그인 해주세요');
+      this.$router.push('/login');
+    }
+  },
   methods: {
+    makeThumbImg() {
+      const reg = /data:[^"]*/;
+      return reg.exec(this.content);
+    },
+    async addPost() {
+      if (!this.title) {
+        alert('제목을 입력하세요');
+      } else if (!this.content) {
+        alert('내용을 입력하세요');
+      } else {
+        await PostsService.addPost({
+          title: this.title,
+          author: this.author,
+          content: this.content,
+          tag: this.tag,
+          thumb: this.makeThumbImg()
+        });
+      }
+    },
+
     upload() {
       let formData = new FormData();
       // formData.append(
@@ -57,17 +79,6 @@ export default {
         .catch(function() {
           console.log('fail');
         });
-    },
-    async addPost() {
-      await PostsService.addPost({
-        title: this.title,
-        author: this.author,
-        content:this.content,
-        tag:this.tag,
-        // files: this.image
-      });
-      console.log(this.image);
-      // this.$router.push({ name: 'Posts' })
     },
     onFileChange(e) {
       var files = e.target.files || e.dataTransfer.files;
@@ -90,14 +101,8 @@ export default {
     },
     handleFilesUpload() {
       let uploadedFiles = this.$refs.files.files;
-      /*
-          Adds the uploaded file to the files array
-        */
-      console.log(uploadedFiles);
     }
   },
-  updated() {
-    console.log(this.content);
-  }
+  updated() {}
 };
 </script>

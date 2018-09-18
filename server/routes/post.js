@@ -9,11 +9,13 @@ router.post('/', (req, res) => {
   const tag = req.body.tag;
   const author = req.body.author;
   const content = req.body.content;
+  const thumb = req.body.thumb;
   const new_post = new Post({
     title,
     author,
     tag,
-    content
+    content,
+    thumb
   });
 
   new_post.save(error => {
@@ -25,23 +27,26 @@ router.post('/', (req, res) => {
   });
 });
 
-router.get('/:title', (req, res) => { 
-  Post.findOne({ 
-    title:req.params.title 
-  } , 'title author tag content', (err, posts) => {
-    if (err) {
-      console.log(err);
+router.get('/:title', (req, res) => {
+  Post.findOne(
+    {
+      title: req.params.title
+    },
+    'title author tag content',
+    (err, posts) => {
+      if (err) {
+        console.log(err);
+      }
+      console.log(posts);
+      res.send({
+        posts
+      });
     }
-    console.log(posts)
-    res.send({
-      posts
-    });
-  })
+  );
 });
 
-
 router.get('/', (req, res) => {
-  Post.find({}, 'title author createdDate content tag', (err, posts) => {
+  Post.find({}, 'title author createdDate content tag thumb', (err, posts) => {
     if (err) {
       console.log(err);
     }

@@ -24,24 +24,25 @@ export default {
   created() {
     axios
       .get(`${process.env.ROOT_API}/posts/${this.$route.params.title}`)
-      .then(response => {        
+      .then(response => {
         const tag = response.data.posts.tag;
         this.post = response.data.posts;
 
         this.splitTag(tag, this.tagList);
       });
   },
-  mounted() {
-
-  },
+  mounted() {},
   methods: {
     splitTag(tag, arr) {
-      if(tag){
-        tag.replace(/ /gi, '').split(',').forEach(element => {
+      if (tag) {
+        tag
+          .replace(/ /gi, '')
+          .split(',')
+          .forEach(element => {
             arr.push(`#${element}`);
-        });
-      }else{
-        return
+          });
+      } else {
+        return;
       }
     }
   }

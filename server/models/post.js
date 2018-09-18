@@ -2,11 +2,12 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const PostSchema = new Schema({
-  author:String,
-  title:String,
-  tag:String,
-  content:String,
-  files:String,
+  author: String,
+  title: String,
+  tag: String,
+  content: String,
+  files: String,
+  thumb: String,
   createdDate: {
     type: Date,
     default: Date.now
@@ -15,9 +16,8 @@ const PostSchema = new Schema({
     type: Date,
     default: Date.now
   },
-  like: Number,
+  like: Number
 });
 
-
-const Post = mongoose.model('post' ,PostSchema);
+const Post = mongoose.model('post', PostSchema);
 module.exports = Post;
