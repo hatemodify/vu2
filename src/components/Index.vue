@@ -82,20 +82,21 @@ export default {
   },
   mounted() {},
   created() {
-    axios
-      .get(
-        'https://newsapi.org/v2/top-headlines?country=kr&apiKey=602cd3b6051a451d8e99935b8e7cad01'
-      )
-      .then(response => {
-        this.headLine = response.data.articles;
-      })
-      .catch(err => {
-        console.log(err);
-      });
-      this.category.forEach((item, idx) => {
-      this.getCategoryNews(item, idx);
+    alert('aaa');
+    // axios
+    //   .get(
+    //     'https://newsapi.org/v2/top-headlines?country=kr&apiKey=602cd3b6051a451d8e99935b8e7cad01'
+    //   )
+    //   .then(response => {
+    //     this.headLine = response.data.articles;
+    //   })
+    //   .catch(err => {
+    //     console.log(err);
+    //   });
+    //   this.category.forEach((item, idx) => {
+    //   this.getCategoryNews(item, idx);
 
-    });
+    // });
   },
   methods: {
     txtEncode(txt) {
