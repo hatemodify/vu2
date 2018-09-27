@@ -1,11 +1,12 @@
 <template>
   <div class="main_cont">
-    <div class="preloader" v-if="loading == false">
+    asdadasdsadsad
+    <!-- <div class="preloader" v-if="loading == false">
       <span class="left"></span>
       <span class="right"></span>
       <span class="preloader_txt"></span>
-    </div>
-    <div class="wrap_headline">
+    </div> -->
+    <!-- <div class="wrap_headline">
       <ul class="list_headline">
         <li v-for="item in headLine" :key="item.title">
           <button class="btn_scrap" :class="{'active': isActive}" @click="thisScrap(item)"></button>
@@ -26,9 +27,9 @@
           </div>
         </li>
       </ul>
-    </div>
-    <div id="a">
-    <div class="wrap_category" v-for="cate in category" :key="cate">
+    </div> -->
+
+    <!-- <div class="wrap_category" v-for="cate in category" :key="cate">
       <h3 class="tit_cate">{{cate}}
         <router-link :to="`/category/${cate}`" class="link_more">주제 더보기</router-link>
       </h3>
@@ -48,8 +49,7 @@
           </a>
         </li>
       </ul>
-    </div>
-    </div>
+    </div> -->
   </div>
 </template>
 <script>
@@ -82,7 +82,6 @@ export default {
   },
   mounted() {},
   created() {
-    alert('aaa');
     // axios
     //   .get(
     //     'https://newsapi.org/v2/top-headlines?country=kr&apiKey=602cd3b6051a451d8e99935b8e7cad01'
@@ -112,13 +111,13 @@ export default {
         });
     }
   },
-  updated() {
-    this.loading = true;
-    const a = document.getElementById('a');
-    const b = a.querySelectorAll('.thumb_img');
-    b.forEach(item =>{
-      item.height > 200 ? item.parentNode.classList.add('bg_wrap'):''
-    });
-  }
+  // updated() {
+  //   this.loading = true;
+  //   const a = document.getElementById('a');
+  //   const b = a.querySelectorAll('.thumb_img');
+  //   b.forEach(item =>{
+  //     item.height > 200 ? item.parentNode.classList.add('bg_wrap'):''
+  //   });
+  // }
 };
 </script>

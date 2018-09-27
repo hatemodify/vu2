@@ -512,43 +512,44 @@
     }
   }
 }
-.wrap_headline {
-  margin: 0 0 20px -20px;
-  .list_headline {
-    display: -webkit-box;
-    overflow-y: hidden;
-    height: 400px;
-    -webkit-overflow-scrolling: touch;
-    &::-webkit-scrollbar {
-      height: 1px;
-      width: 50%;
-      border-bottom: 1px solid #ededed;
-    }
-    &::-webkit-scrollbar-track {
-      margin-left: 20px;
-    }
-    &::-webkit-scrollbar-thumb {
-      background: #555;
-      height: 1px;
-      width: 30px;
-    }
-  }
-  li {
-    margin-right: 20px;
-    &:first-child {
-      margin-left: 20px;
-    }
-  }
-  .wrap_thumb {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    // height: 240px;
-    // max-height: 240px;
-    height: 180px;
-    max-height: 180px;
-  }
-}
+// .wrap_headline {
+//   margin: 0 0 20px -20px;
+  
+//   .list_headline {
+//     display: -webkit-box;
+//     overflow-y: hidden;
+//     height: 400px;
+//     -webkit-overflow-scrolling: touch;
+//     &::-webkit-scrollbar {
+//       height: 1px;
+//       width: 50%;
+//       border-bottom: 1px solid #ededed;
+//     }
+//     &::-webkit-scrollbar-track {
+//       margin-left: 20px;
+//     }
+//     &::-webkit-scrollbar-thumb {
+//       background: #555;
+//       height: 1px;
+//       width: 30px;
+//     }
+//   }
+//   li {
+//     margin-right: 20px;
+//     &:first-child {
+//       margin-left: 20px;
+//     }
+//   }
+//   .wrap_thumb {
+//     display: flex;
+//     justify-content: center;
+//     align-items: center;
+//     // height: 240px;
+//     // max-height: 240px;
+//     height: 180px;
+//     max-height: 180px;
+//   }
+// }
 .wrap_category {
   background: #fff;
   margin: 0 0 20px -7px;
@@ -879,3 +880,46 @@ li:last-child {
   overflow: hidden;
   padding-bottom: 40px;
 }
+.wrap_headline {
+  margin: 0 0 20px -20px;
+
+  .list_headline {
+    scroll-snap-type: x mandatory;
+    overflow-x: scroll;
+    overflow-y: hidden;
+    display: flex;
+    align-items: center;
+    &::-webkit-scrollbar {
+      height: 1px;
+      width: 50%;
+      border-bottom: 1px solid #ededed;
+    }
+    &::-webkit-scrollbar-track {
+      margin-left: 20px;
+    }
+    &::-webkit-scrollbar-thumb {
+      background: #555;
+      height: 1px;
+      width: 30px;
+    }
+  }
+  li {
+    margin-right: 20px;
+    scroll-snap-align: center;
+    min-width: 85%;
+    &:first-child {
+      margin-left: 20px;
+    }
+  }
+  .wrap_thumb {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    // height: 240px;
+    // max-height: 240px;
+    height: 180px;
+    max-height: 180px;
+  }
+}
+
+
