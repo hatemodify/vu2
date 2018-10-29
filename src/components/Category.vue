@@ -12,8 +12,10 @@
           <div class="wrap_info">
             <strong class="news_subject">{{item.title}}</strong>
             <p class="news_desc">{{item.description}}</p>
+            <div class="cf">
             <span class="txt_source">{{item.source.name}}</span>
-            <span class="txt_date">{{item.publishedAt}}</span>
+            <span class="txt_date">{{comm.convertDate(item.publishedAt)}}</span>
+            </div>
           </div>
         </a>
       </li>
@@ -24,11 +26,13 @@
 <script>
 import axios from 'axios';
 import VueLodash from 'vue-lodash';
+import comm from '../services/common.js';
 
 export default {
   data() {
     return {
       articles: '',
+      comm: comm,
       category: this.$route.params.category
     };
   },
@@ -52,13 +56,7 @@ export default {
       );
   },
   methods: {
-    animation: function() {
-      const tw = TweenMax;
-      const li = document.querySelector('.list_articles').childNodes;
 
-      console.log(li);
-      tw.staggerTo(li, 0.3, { x: '0%', opacity: 1 }, 0.1);
-    }
   },
   methods: {
     infiniteScroll() {

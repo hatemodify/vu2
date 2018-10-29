@@ -20,7 +20,7 @@
   }
 }
 
-.thumb_img {
+.thumb_img {  
   width: 100%;
 }
 
@@ -131,17 +131,7 @@
     background-color: #fff;
     box-shadow: 10px 13px 30px rgba(9, 9, 9, 0.3);
   }
-  .btn_scrap {
-    position: absolute;
-    right: 20px;
-    top: 0;
-    width: 30px;
-    height: 35px;
-    border-left: 1px solid #eee;
-    border-right: 1px solid #eee;
-    background: none;
-    z-index: 1;
-  }
+
   .link_item {
     display: block;
   }
@@ -242,7 +232,6 @@
 .list_news {
   li {
     position: relative;
-    height: 150px;
     margin-bottom: 30px;
     background: #fff;
     box-shadow: 10px 13px 30px rgba(9, 9, 9, 0.3);
@@ -250,31 +239,17 @@
   .wrap_thumb {
     overflow: hidden;
     position: relative;
-    width: 160px;
-    height: 100%;
-    background-size: 40px auto;
-    background-position: 40px center;
+    max-height: 200px;
     &:after {
       position: absolute;
       left: 0;
       top: 0;
-      width: 100%;
-      height: 100%;
-      background: linear-gradient(
-        to right,
-        rgba(0, 0, 0, 0) 0%,
-        rgba(0, 0, 0, 0) 20%,
-        rgba(0, 0, 0, 0.5) 70%,
-        rgba(0, 0, 0, 0.8) 99%
-      );
+      bottom: 0;
+      right: 0;
       content: '';
     }
   }
   .wrap_info {
-    position: absolute;
-    width: 70%;
-    right: 0;
-    bottom: 0px;
     padding: 15px 20px;
     background: #fff;
     .news_subject {
@@ -878,7 +853,7 @@ li:last-child {
 }
 .inner {
   overflow: hidden;
-  padding-bottom: 40px;
+  padding:0 0 40px 14px
 }
 .wrap_headline {
   margin: 0 0 20px -20px;
@@ -923,3 +898,21 @@ li:last-child {
 }
 
 
+.btn_scrap {
+  position: absolute;
+  right: 20px;
+  top: 0;
+  width: 30px;
+  height: 35px;
+  border-left: 1px solid #eee;
+  border-right: 1px solid #eee;
+  background: none;
+  z-index: 1;
+  &:before{
+    position: absolute;
+    width:11px;
+    height: 1px;
+    background:#fff;
+    content: "";
+  }
+}

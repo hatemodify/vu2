@@ -1,21 +1,19 @@
 <template>
   <div class="main_cont">
-    asdadasdsadsad
-    <!-- <div class="preloader" v-if="loading == false">
+    <div class="preloader" v-if="loading == false">
       <span class="left"></span>
       <span class="right"></span>
       <span class="preloader_txt"></span>
-    </div> -->
-    <!-- <div class="wrap_headline">
+    </div>
+    <div class="wrap_headline">
       <ul class="list_headline">
         <li v-for="item in headLine" :key="item.title">
           <button class="btn_scrap" :class="{'active': isActive}" @click="thisScrap(item)"></button>
           <a :href="item.url" class="link_item" target="_blank">
             <picture class="wrap_thumb" v-if="item.urlToImage">
               <img :src="item.urlToImage" class="thumb_img" alt="">
-            </picture>            
-            <div class="wrap_thumb no_img" v-else>
-            </div>
+            </picture>
+            <div class="wrap_thumb no_img" v-else></div>
           </a>
           <div class="wrap_info">
             <strong class="tit_news">{{item.title}}</strong>
@@ -27,9 +25,9 @@
           </div>
         </li>
       </ul>
-    </div> -->
+    </div>
 
-    <!-- <div class="wrap_category" v-for="cate in category" :key="cate">
+    <div class="wrap_category" v-for="cate in category" :key="cate">
       <h3 class="tit_cate">{{cate}}
         <router-link :to="`/category/${cate}`" class="link_more">주제 더보기</router-link>
       </h3>
@@ -49,7 +47,7 @@
           </a>
         </li>
       </ul>
-    </div> -->
+    </div>
   </div>
 </template>
 <script>
@@ -77,27 +75,31 @@ export default {
         general: '',
         health: '',
         science: ''
-      }
+      },
+      
     };
   },
   mounted() {},
   created() {
-    // axios
-    //   .get(
-    //     'https://newsapi.org/v2/top-headlines?country=kr&apiKey=602cd3b6051a451d8e99935b8e7cad01'
-    //   )
-    //   .then(response => {
-    //     this.headLine = response.data.articles;
-    //   })
-    //   .catch(err => {
-    //     console.log(err);
-    //   });
-    //   this.category.forEach((item, idx) => {
-    //   this.getCategoryNews(item, idx);
 
-    // });
+    axios
+      .get(
+        'https://newsapi.org/v2/top-headlines?country=kr&apiKey=602cd3b6051a451d8e99935b8e7cad01'
+      )
+      .then(response => {
+        this.headLine = response.data.articles;
+      })
+      .catch(err => {
+        console.log(err);
+      });
+      this.category.forEach((item, idx) => {
+      this.getCategoryNews(item, idx);
+    });
   },
   methods: {
+    errorImg(){
+      console.log('error img')
+    },
     txtEncode(txt) {
       return JSON.stringify(txt);
     },
@@ -111,13 +113,18 @@ export default {
         });
     }
   },
-  // updated() {
-  //   this.loading = true;
-  //   const a = document.getElementById('a');
-  //   const b = a.querySelectorAll('.thumb_img');
-  //   b.forEach(item =>{
-  //     item.height > 200 ? item.parentNode.classList.add('bg_wrap'):''
-  //   });
-  // }
+  updated() {
+    this.loading = true;
+    const a = document.getElementById('app');
+    const b = a.querySelectorAll('.thumb_img');    
+    b.forEach((item, index) =>{
+      if(item.height >200){
+        item.parentNode.classList.add('bg_wrap')
+      }else if(item.width == 0){
+        console.log(item)
+      }
+   
+    });
+  }
 };
 </script>
