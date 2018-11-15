@@ -48,11 +48,11 @@ export default {
       )
       .then(
         response => {
-          // response.data.articles.forEach(element => {
-          //   if (!_.startsWith(element.urlToImage, 'https') && element.urlToImage) {
-          //    element.urlToImage=  element.urlToImage.toString().replace('http', 'https')
-          //   }
-          // });
+          response.data.articles.forEach(element => {
+            if (element.urlToImage) {
+             element.urlToImage=  element.urlToImage.toString().replace('http:', '')
+            }
+          });
           this.headLine = response.data.articles;
           this.loading = true;
         },
